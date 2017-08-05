@@ -1,12 +1,13 @@
 <?php
 
-namespace ImGrowth\Node;
+namespace ImGrowth\Entity;
 
 class Node
 {
 
     protected $values = array(
         'ip' => null,
+        'name'=>null,
         'humidity' => null,
         'lastPingTime' => null
     );
