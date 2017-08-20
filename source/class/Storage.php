@@ -52,9 +52,9 @@ class Storage
     }
 
 
-    public function storeNodeRecord()
+    public function storeNodeRecord(\ImGrowth\Entity\NodeRecord $record)
     {
-
+        $this->nodeRecordStorage->store($record);
     }
 
 

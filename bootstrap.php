@@ -5,83 +5,38 @@ require(__DIR__ . '/vendor/autoload.php');
 
 $application = new \Phi\Application\Application(__DIR__);
 
-$application->getContainer()->set('storage', function() use($application) {
+
+$application->getContainer()->set('database', function () {
     $fileName = 'sqlite:' . __DIR__ . '/data/imgrowth.sqlite';
     $driver = new \Phi\Database\Driver\PDO\Source($fileName);
-    $storage = new \ImGrowth\Storage($driver);
+    return $driver;
+});
+
+$application->getContainer()->set('storage', function () use ($application) {
+    $storage = new \ImGrowth\Storage($application->getContainer()->get('database'));
     return $storage;
 });
 
-
-
-$router = new \Phi\Routing\Router();
-$application->setRouter($router);
-
-
-
-$router->get('initialize', '`/initialize`', function () use($application) {
-
-    $storage = $application->getContainer()->get('storage');
-    $storage->initialize();
-
-    return true;
-
-});
-
-
-
-$router->get('reset', '`/reset`', function () use($application) {
-
-    $storage = $application->getContainer()->get('storage');
-
-    $storage->reset();
-    //$storage->initialize();
-
-    return true;
-
-});
-
-
-
-
-
-
-
-$router->get('declare', '`/declare`', function () use($application) {
-
-
-    $ip = $_SERVER['REMOTE_ADDR'];
-
-
-    $storage = $application->getContainer()->get('storage');
-
-
+$application->getContainer()->set('node', function () use ($application) {
     $node = new \ImGrowth\Entity\Node();
-    $node->setValues(array(
-        'ip' => $ip,
-        'lastPingTime' => time()
-    ));
+    $node->setStorage(
+        new \ImGrowth\Storage\Node($application->getContainer()->get('database'))
+    );
 
-    $storage->storeNode($node);
-
-    print_r($node);
-});
+    return $node;
 
 
+}, false);
 
-$router->get('getHumidity', '`/getHumidity`', function () use($application) {
-
-    $storage = $application->getContainer()->get('storage');
-
-
-    return true;
-
-});
+$application->getContainer()->set('nodeRecord', function () use ($application) {
+    $nodeRecord = new \ImGrowth\Entity\NodeRecord();
+    $nodeRecord->setStorage(
+        new \ImGrowth\Storage\NodeRecord($application->getContainer()->get('database'))
+    );
+    return $nodeRecord;
+}, false);
 
 
 
-$application->run();
-
-echo $application->getOutput();
 
 

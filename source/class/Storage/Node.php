@@ -4,8 +4,10 @@ namespace ImGrowth\Storage;
 
 use ImGrowth\Entity\Node as NodeEntity;
 use Phi\Database\Source;
+use Phi\Model\Entity;
+use Phi\Model\Interfaces\Storage;
 
-class Node
+class Node implements Storage
 {
 
     /**
@@ -25,10 +27,14 @@ class Node
         $query = "
             CREATE TABLE node (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
+              version  varchar(15),
               ip varchar(15),
               name varchar(255),
               ping_time datetime,
+              creation_date datetime,
+              data_uri TEXT,
               data TEXT
+              
             )
         ";
         $this->database->query($query);
@@ -49,9 +55,13 @@ class Node
         $query = "
           select
             id,
-            name,
+            version,
             ip,
-            ping_time as lastPingTime
+            name,
+            ping_time,
+            creation_date,
+            data_uri,
+            data
           from node
         ";
 
@@ -68,19 +78,27 @@ class Node
     }
 
 
-    public function store(NodeEntity $node)
+    public function store(Entity $node)
     {
 
         if (!$this->exists($node)) {
             $ip = $node->getValue('ip');
+            $version = $node->getValue('version');
+            $dataURI = $node->getValue('data_uri');
 
             $query = "
                 INSERT INTO node (
                   ip,
-                  ping_time
+                  ping_time,
+                  creation_date,
+                  version,
+                  data_uri
                 ) VALUES (
                   " . $this->database->escape($ip) . ",
-                  " . $this->database->escape(date('Y-m-d H:i:s')) . "
+                  " . $this->database->escape(date('Y-m-d H:i:s')) . ",
+                  " . $this->database->escape(date('Y-m-d H:i:s')) . ",
+                  " . $this->database->escape($version) . ",
+                  " . $this->database->escape($dataURI) . "
                 )
             ";
             $this->database->query($query);
@@ -91,9 +109,6 @@ class Node
                 UPDATE node SET 
                   ping_time =" . $this->database->escape(date('Y-m-d H:i:s')) . "
             ";
-
-            print_r($query);
-
             $this->database->query($query);
         }
         return $this;

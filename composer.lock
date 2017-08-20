@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1084310639f428de6f247a59eddcbaf6",
-    "content-hash": "1f1cd0e94451b27ad963be00b4e9fcd1",
+    "hash": "d1b0185c966c86b0bd9e0231308cc747",
+    "content-hash": "2926923fdf50c65e10002aacdc24d198",
     "packages": [
         {
             "name": "phi",
@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ElBiniou/phi.git",
-                "reference": "9712e689b3b2cec2c3b44ebb801784679c8d2201"
+                "reference": "03a3cee1e9ac47dc55e8cfbcef4158413bd78411"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ElBiniou/phi/zipball/9712e689b3b2cec2c3b44ebb801784679c8d2201",
-                "reference": "9712e689b3b2cec2c3b44ebb801784679c8d2201",
+                "url": "https://api.github.com/repos/ElBiniou/phi/zipball/03a3cee1e9ac47dc55e8cfbcef4158413bd78411",
+                "reference": "03a3cee1e9ac47dc55e8cfbcef4158413bd78411",
                 "shasum": ""
             },
             "require": {
@@ -51,7 +51,7 @@
                 "source": "https://github.com/ElBiniou/phi/tree/master",
                 "issues": "https://github.com/ElBiniou/phi/issues"
             },
-            "time": "2017-08-05 01:00:05"
+            "time": "2017-08-07 12:31:45"
         },
         {
             "name": "phi-application",
@@ -59,12 +59,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ElBiniou/phi-application.git",
-                "reference": "ec0904d07885642db253460870c09774cc78aba8"
+                "reference": "58b1d0bf08b9f1f84887ae0dd0c9dd43b8161484"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ElBiniou/phi-application/zipball/ec0904d07885642db253460870c09774cc78aba8",
-                "reference": "ec0904d07885642db253460870c09774cc78aba8",
+                "url": "https://api.github.com/repos/ElBiniou/phi-application/zipball/58b1d0bf08b9f1f84887ae0dd0c9dd43b8161484",
+                "reference": "58b1d0bf08b9f1f84887ae0dd0c9dd43b8161484",
                 "shasum": ""
             },
             "require": {
@@ -84,7 +84,7 @@
                 "source": "https://github.com/ElBiniou/phi-application/tree/master",
                 "issues": "https://github.com/ElBiniou/phi-application/issues"
             },
-            "time": "2017-06-29 17:53:11"
+            "time": "2017-08-05 15:58:49"
         },
         {
             "name": "phi-cache",
@@ -210,12 +210,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ElBiniou/phi-database.git",
-                "reference": "7612b7473d6d115b0c0149d239356907d92b7b45"
+                "reference": "79aee672a02638dfde486003bffaf6451aee799a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ElBiniou/phi-database/zipball/7612b7473d6d115b0c0149d239356907d92b7b45",
-                "reference": "7612b7473d6d115b0c0149d239356907d92b7b45",
+                "url": "https://api.github.com/repos/ElBiniou/phi-database/zipball/79aee672a02638dfde486003bffaf6451aee799a",
+                "reference": "79aee672a02638dfde486003bffaf6451aee799a",
                 "shasum": ""
             },
             "type": "library",
@@ -230,7 +230,7 @@
                 "source": "https://github.com/ElBiniou/phi-database/tree/master",
                 "issues": "https://github.com/ElBiniou/phi-database/issues"
             },
-            "time": "2017-06-01 11:34:28"
+            "time": "2017-08-05 15:58:39"
         },
         {
             "name": "phi-event",
@@ -287,6 +287,34 @@
                 "issues": "https://github.com/ElBiniou/phi-http/issues"
             },
             "time": "2017-06-28 14:52:43"
+        },
+        {
+            "name": "phi-model",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ElBiniou/phi-model.git",
+                "reference": "f4ed1184c6bef1554ee4050cd43d74ae45fdbcbd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ElBiniou/phi-model/zipball/f4ed1184c6bef1554ee4050cd43d74ae45fdbcbd",
+                "reference": "f4ed1184c6bef1554ee4050cd43d74ae45fdbcbd",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phi\\Model\\": "source/class"
+                },
+                "files": []
+            },
+            "description": "Phi model",
+            "support": {
+                "source": "https://github.com/ElBiniou/phi-model/tree/master",
+                "issues": "https://github.com/ElBiniou/phi-model/issues"
+            },
+            "time": "2017-08-05 16:17:08"
         },
         {
             "name": "phi-routing",
@@ -447,6 +475,7 @@
         "phi-session": 20,
         "phi-cache": 20,
         "phi-database": 20,
+        "phi-model": 20,
         "phi-storage": 20,
         "phi-event": 20,
         "phi-application": 20,

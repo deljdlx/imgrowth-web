@@ -4,8 +4,10 @@ namespace ImGrowth\Storage;
 
 use ImGrowth\Node\Node as NodeEntity;
 use Phi\Database\Source;
+use Phi\Model\Entity;
+use Phi\Model\Interfaces\Storage;
 
-class NodeRecord
+class NodeRecord implements Storage
 {
 
     /**
@@ -38,6 +40,24 @@ class NodeRecord
     public function reset()
     {
         $this->database->query("DROP TABLE node_record");
+        return $this;
+    }
+
+    public function store(Entity $record)
+    {
+        $query = "
+            INSERT INTO node_record (
+              node_id,
+              date,
+              data
+            ) VALUES (
+              " . $this->database->escape($record->getValue('node_id')) . ",
+              " . $this->database->escape(date('Y-m-d H:i:s')) . ",
+              " . $this->database->escape($record->getValue('data')) . "
+            )
+        ";
+        $this->database->query($query);
+        $record->setValue('id', $this->database->getLastInsertId());
         return $this;
     }
 
