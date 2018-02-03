@@ -27,7 +27,13 @@ class Node implements Storage
         $query = "
             CREATE TABLE node (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
-              version  varchar(15),
+              
+              version varchar(15),
+              firmware  varchar(15),
+              mac varchar(64),
+              
+              
+              
               ip varchar(15),
               name varchar(255),
               ping_time datetime,
@@ -42,9 +48,12 @@ class Node implements Storage
         return $this;
     }
 
+
+
     public function reset()
     {
         $this->database->query("DROP TABLE node");
+        $this->initialize();
         return $this;
     }
 

@@ -1,0 +1,162 @@
+
+body {
+    background-color: #FFF;
+    margin: 8px;
+    padding: 8px;
+    font-family: sans-serif;
+}
+
+
+h3 {
+    font-weight: bold;
+}
+
+
+
+.mesure {
+    font-size: 3em;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+.fieldset {
+    border: 2px groove threedface;
+    border-top: none;
+    padding: 0.5em;
+    margin: 1em 2px;
+
+
+}
+
+.fieldset > h1 {
+    font-size: 1em;
+    margin: -1em -0.5em 0;
+}
+
+.fieldset > h1 > span {
+    float: left;
+}
+
+.fieldset > h1:before {
+    border-top: 2px groove threedface;
+    content: ' ';
+    float: left;
+    margin: 0.5em 2px 0 -1px;
+    width: 0.75em;
+}
+
+.fieldset > h1:after {
+    border-top: 2px groove threedface;
+    content: ' ';
+    display: block;
+    height: 1.5em;
+    left: 2px;
+    margin: 0 1px 0 0;
+    overflow: hidden;
+    position: relative;
+    top: 0.5em;
+}
+
+
+
+
+
+.noUi-horizontal {
+    /*height: 5px;*/
+
+}
+
+.slider.noUi-connect {
+    background-color: #0a568c;
+}
+
+
+
+
+
+
+
+
+.circleGraph .circle {
+    position: relative;
+    width: 210px;
+    height: 210px;
+
+
+}
+.circleGraph .circle img {
+    width: 170px;
+    height: 170px;
+    vertical-align: top;
+    border-radius: 50%;
+    border: solid 2px #FFF;
+    margin: 20px;
+}
+
+.circleGraph .circle canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+
+
+.circleGraph .description {
+    top:0;
+    margin-left: 220px;
+}
+
+
+.circleGraph .title {
+    text-transform: uppercase;
+    font-weight: bolder;
+    color: #452670;
+}
+
+.circleGraph .legend {
+    text-transform: uppercase;
+    font-weight: bolder;
+    color: #000;
+    margin-bottom: 24px;
+}
+
+.circleGraph .graph {
+    float: left;
+}
+
+.circleGraph .graph .value {
+
+    position: absolute;
+    box-sizing: border-box;
+    position: absolute;
+
+    font-size: 40px;
+    font-weight: bold;
+    top: 150px;
+    left: 175px;
+
+    /*
+    background-color: rgba(0, 200,0, 0.8);
+    color: white;
+    text-align: center;
+    font-weight: bolder;
+    margin-top: 20px;
+    font-size: 15px;
+    border-radius: 50%;
+    padding: 12px 0px 0px 0px;
+    top: 130px;
+    left: 162px;
+    height: 60px;
+    width: 60px;
+    border: solid 3px rgba(0,0,0, 0.6);
+    */
+}

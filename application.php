@@ -10,59 +10,28 @@ $router = new \Phi\Routing\Router();
 $application->setRouter($router);
 
 
-$router->get('initialize', '`/initialize`', function () use ($application) {
-    $storage = $application->getContainer()->get('storage');
-    $storage->initialize();
-    return true;
-});
+
+$defaultRouteConfiguration = new \ImGrowth\Configuration\Router\Main($application);
+$defaultRouteConfiguration->registerRoutes($router);
 
 
-$router->get('reset', '`/reset`', function () use ($application) {
-    $storage = $application->getContainer()->get('storage');
-    $storage->reset();
-    return true;
-
-});
+$nodeRouteConfiguration = new \ImGrowth\Configuration\Router\NodeAdministration($application);
+$nodeRouteConfiguration->registerRoutes($router);
 
 
-$router->get('declare', '`/declare`', function () use ($application) {
+//=======================================================
 
 
-    $ip = $_SERVER['REMOTE_ADDR'];
-    $nodeDataURI = $_GET['dataURI'];
-    $nodeVersion = $_GET['nodeVersion'];
 
 
-    $storage = $application->getContainer()->get('storage');
 
-
-    $node = new \ImGrowth\Entity\Node();
-    $node->setValues(array(
-        'ip' => $ip,
-        'ping_time' => date('Y-m-d H:i:s'),
-        'data_uri' => $nodeDataURI,
-        'version' => $nodeVersion,
-    ));
-
-    $storage->storeNode($node);
-
-    print_r($node);
-});
-
-
-$router->get('node/data', '`/node/data`', function () use ($application) {
-
-
-});
-
-
-$router->get('getNodeData', '`/getNodeData`', function () use ($application) {
+/*
+$router->get('node/getData', '`/getNodeData`', function () use ($application) {
 
     $storage = $application->getContainer()->get('storage');
     $nodes = $storage->getAllNodes();
-
-
     $nodesData = array();
+
 
     foreach ($nodes as $node) {
         $data = $node->getData();
@@ -79,12 +48,32 @@ $router->get('getNodeData', '`/getNodeData`', function () use ($application) {
         $nodeRecord->store();
     }
 
+
     echo json_encode($nodesData);
 
 
     return true;
-
 });
+*/
+
+
+
+
+//=======================================================
+
+
+
+
+
+
+
+
+$router->get('index', '`.*`', function () use ($application) {
+    include(__DIR__.'/template/dashboard.php');
+});
+
+
+
 
 
 $application->run();

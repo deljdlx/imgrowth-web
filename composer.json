@@ -2,7 +2,6 @@
   "name": "imgrowth-web",
   "description": "Web interface for imgrowth system",
   "repositories": [
-    {"type": "vcs", "url": "https://github.com/ElBiniou/phi"},
     {"type": "vcs", "url": "https://github.com/ElBiniou/phi-routing"},
     {"type": "vcs", "url": "https://github.com/ElBiniou/phi-traits"},
     {"type": "vcs", "url": "https://github.com/ElBiniou/phi-http"},
@@ -16,10 +15,10 @@
     {"type": "vcs", "url": "https://github.com/ElBiniou/phi-component"},
     {"type": "vcs", "url": "https://github.com/ElBiniou/phi-template"},
     {"type": "vcs", "url": "https://github.com/ElBiniou/phi-container"},
-    {"type": "vcs", "url": "https://github.com/ElBiniou/phi-configuration"}
+    {"type": "vcs", "url": "https://github.com/ElBiniou/phi-configuration"},
+    {"type": "vcs", "url": "https://github.com/ElBiniou/dashboard"}
   ],
   "require": {
-    "phi": "dev-master",
     "phi-traits": "dev-master",
     "phi-routing": "dev-master",
     "phi-http": "dev-master",
@@ -33,7 +32,9 @@
     "phi-component": "dev-master",
     "phi-template": "dev-master",
     "phi-container": "dev-master",
-    "phi-configuration": "dev-master"
+    "phi-configuration": "dev-master",
+
+    "elbiniou-dashboard": "dev-master"
   },
   "require-dev": {
 
@@ -47,7 +48,8 @@
       "source/helper.php"
     ],
     "psr-4": {
-      "ImGrowth\\": "source/class"
+      "ImGrowth\\": "source/class",
+      "ImGrowth\\Configuration\\": "Configuration"
     }
   }
 }

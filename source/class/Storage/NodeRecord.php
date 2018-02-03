@@ -40,6 +40,7 @@ class NodeRecord implements Storage
     public function reset()
     {
         $this->database->query("DROP TABLE node_record");
+        $this->initialize();
         return $this;
     }
 

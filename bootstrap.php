@@ -3,6 +3,13 @@
 require(__DIR__ . '/vendor/autoload.php');
 
 
+
+$autoloader=new \Elbiniou\Dashboard\Autoloader();
+$autoloader->addNamespace('Elbiniou\Dashboard', __DIR__.'/vendor/elbiniou-dashboard/source/class');
+$autoloader->register();
+
+
+
 $application = new \Phi\Application\Application(__DIR__);
 
 
@@ -12,10 +19,14 @@ $application->getContainer()->set('database', function () {
     return $driver;
 });
 
+
 $application->getContainer()->set('storage', function () use ($application) {
-    $storage = new \ImGrowth\Storage($application->getContainer()->get('database'));
+    $storage = new \ImGrowth\Storage(
+        $application->getContainer()->get('database')
+    );
     return $storage;
 });
+
 
 $application->getContainer()->set('node', function () use ($application) {
     $node = new \ImGrowth\Entity\Node();
