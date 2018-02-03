@@ -81,14 +81,21 @@ ImGrowth.Application.prototype.start = function() {
         manager.setHumiditySlidersValues(data.humidity);
     });
 
+
+
+
+
     this.seed.getData(function(data) {
 
-
         $('#temperature').html(data.temperature+'°C');
-        $('#light').html(data.light+' LUX');
+        $('#light').html(data.light+' lux');
+
+
 
 
         for(var i=0; i<data.humidity.length; i++) {
+
+
 
             var humidity = data.humidity[i];
 
@@ -96,6 +103,10 @@ ImGrowth.Application.prototype.start = function() {
 
             var node = $('#CircleGauge-'+i);
             node.get(0).setAttribute('data-value', value);
+
+            console.debug($(node));
+
+            $(node).find('.value').html(data.humidity[i]);
 
             var test = new DB_CircleGauge();
 

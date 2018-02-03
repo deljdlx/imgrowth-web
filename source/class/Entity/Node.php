@@ -21,6 +21,12 @@ class Node extends Entity
     }
 
 
+    public function calibrateHumidity($index, $values) {
+
+    }
+
+
+
     public function getData()
     {
         $dataURL='http://'.$this->getValue('ip').$this->getValue('data_uri');

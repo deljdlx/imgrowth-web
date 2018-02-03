@@ -20,18 +20,40 @@ $application->getContainer()->set('database', function () {
 });
 
 
-$application->getContainer()->set('storage', function () use ($application) {
-    $storage = new \ImGrowth\Storage(
+$application->getContainer()->set('repository', function () use ($application) {
+    $storage = new \ImGrowth\Repository(
         $application->getContainer()->get('database')
     );
     return $storage;
 });
 
 
+
+$application->getContainer()->set('nodeRepository', function () use ($application) {
+    return new \ImGrowth\Repository\Node(
+        $application->getContainer()->get('database')
+    );
+});
+
+$application->getContainer()->set('nodeRecordRepository', function () use ($application) {
+    return new \ImGrowth\Repository\NodeRecord(
+        $application->getContainer()->get('database')
+    );
+});
+
+
+
+
+
+
+
+
+//=======================================================
+//test
 $application->getContainer()->set('node', function () use ($application) {
     $node = new \ImGrowth\Entity\Node();
     $node->setStorage(
-        new \ImGrowth\Storage\Node($application->getContainer()->get('database'))
+        $application->getContainer()->get('nodeRepository')
     );
 
     return $node;
@@ -42,7 +64,7 @@ $application->getContainer()->set('node', function () use ($application) {
 $application->getContainer()->set('nodeRecord', function () use ($application) {
     $nodeRecord = new \ImGrowth\Entity\NodeRecord();
     $nodeRecord->setStorage(
-        new \ImGrowth\Storage\NodeRecord($application->getContainer()->get('database'))
+        $application->getContainer()->get('nodeRepository')
     );
     return $nodeRecord;
 }, false);

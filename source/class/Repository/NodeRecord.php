@@ -1,6 +1,6 @@
 <?php
 
-namespace ImGrowth\Storage;
+namespace ImGrowth\Repository;
 
 use ImGrowth\Node\Node as NodeEntity;
 use Phi\Database\Source;

@@ -179,6 +179,17 @@
     <h1><span>Réglages humidité</span></h1>
 
 
+
+    <div class="btn-group btn-group-justified btn-group-raised">
+        <a href="javascript:void(0)" class="btn " id="calibrate0">Calibrage humidité 0%</a>
+        <a href="javascript:void(0)" class="btn " id="calibrate1">Calibrage humidité 100%</a>
+    </div>
+
+
+
+    <hr/>
+
+
     <div class="nodeConfiguration" style="padding: 16px;">
 
 

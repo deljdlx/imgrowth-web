@@ -1,6 +1,6 @@
 <?php
 
-namespace ImGrowth\Storage;
+namespace ImGrowth\Repository;
 
 use ImGrowth\Entity\Node as NodeEntity;
 use Phi\Database\Source;
@@ -31,15 +31,15 @@ class Node implements Storage
               version varchar(15),
               firmware  varchar(15),
               mac varchar(64),
-              
-              
-              
               ip varchar(15),
+              
               name varchar(255),
+              
               ping_time datetime,
               creation_date datetime,
               data_uri TEXT,
-              data TEXT
+              data TEXT,
+              calibration TEXT
               
             )
         ";

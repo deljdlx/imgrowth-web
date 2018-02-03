@@ -3,10 +3,10 @@
 namespace ImGrowth;
 
 use ImGrowth\Entity\Node;
-use ImGrowth\Storage\NodeRecord;
+use ImGrowth\Repository\NodeRecord;
 use Phi\Database\Source;
 
-class Storage
+class Repository
 {
 
     /**
@@ -19,7 +19,7 @@ class Storage
     {
         $this->database = $database;
 
-        $this->nodeStorage = new \ImGrowth\Storage\Node($database);
+        $this->nodeStorage = new \ImGrowth\Repository\Node($database);
         $this->nodeRecordStorage = new NodeRecord($database);
     }
 
