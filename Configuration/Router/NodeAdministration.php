@@ -5,7 +5,6 @@ namespace ImGrowth\Configuration\Router;
 
 
 use ImGrowth\Entity\Node;
-use ImGrowth\Repository;
 use Phi\Application\Application;
 use Phi\Routing\Interfaces\Router;
 
@@ -32,10 +31,10 @@ class NodeAdministration
                 "date" => date('Y-m-d H:i'),
                 "version" => "0.0.1",
                 "humidity" => array(
-                    0 => 4000,
-                    1 => 4000,
-                    2 => 4000,
-                    3 => 4000
+                    0 => 2000,
+                    1 => 2000,
+                    2 => 2000,
+                    3 => 2000
                 )
             );
             header('Content-type: application/json');
@@ -45,7 +44,11 @@ class NodeAdministration
 
         $router->get('server/initialize', '`/server/initialize`', function () use ($application) {
 
-            $repository = $application->getContainer()->get('repository');
+            $repository = $application->getContainer()->get('nodeRepository');
+            $repository->reset();
+
+
+            $repository = $application->getContainer()->get('nodeRecordRepository');
             $repository->reset();
 
             $data = array(
@@ -61,13 +64,34 @@ class NodeAdministration
 
 
 
-        $router->post('node/register', '`/node/register`', function () {
+        $router->post('node/register', '`/node/register`', function () use ($application) {
 
-            $data= $this->request->post();
+            $json= $this->request->post();
 
-            file_put_contents('dump.php', json_encode($data, JSON_PRETTY_PRINT));
+            $data=json_decode($json['data']);
 
-            die('EXIT '.__FILE__.'@'.__LINE__);
+            $rawData = json_encode($json, JSON_PRETTY_PRINT);
+
+
+            $node = new Node();
+            $node->setValue('data', $rawData);
+            $node->setValue('ip', $data->meta->ip);
+            $node->setValue('node_id', $data->meta->id);
+            $node->setValue('mac', $data->meta->mac);
+            $node->setValue('firmware', $data->meta->firmware);
+
+
+
+            $nodeRepository = $application->getContainer()->get('nodeRepository');
+            $nodeRepository->store($node);
+
+            //file_put_contents('dump.php', json_encode($data, JSON_PRETTY_PRINT));
+
+            header('Content-type: application/json');
+            echo json_encode($node);
+
+
+            //die('EXIT '.__FILE__.'@'.__LINE__);
         });
 
 
@@ -147,3 +171,4 @@ class NodeAdministration
 
 
 }
+

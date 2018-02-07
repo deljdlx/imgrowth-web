@@ -10,8 +10,15 @@ class Node extends Entity
     protected $values = array(
         'ip' => null,
         'version' => null,
-        'name' => null,
+        'firmware' => null,
+        'mac' => null,
+
+        'creation_date' => null,
+        'data' => null,
+        'calibration' => null,
+
         'ping_time' => null,
+
         'data_uri' => null,
     );
 
@@ -23,8 +30,17 @@ class Node extends Entity
 
     public function calibrateHumidity($index, $values) {
 
+
     }
 
+    public function getRecords()
+    {
+
+        $recordRepository = new \ImGrowth\Repository\NodeRecord($this->getRepository()->getSource());
+        $records = $recordRepository->getRecordsByNodeId($this->getValue('id'));
+
+        return $records;
+    }
 
 
     public function getData()
@@ -32,6 +48,14 @@ class Node extends Entity
         $dataURL='http://'.$this->getValue('ip').$this->getValue('data_uri');
         $data = json_decode(file_get_contents($dataURL), true);
         return $data;
+    }
+
+    public function createRecord($recordData)
+    {
+        $record = new NodeRecord();
+        $record->setValue('node_id', $this->getValue('id'));
+        $record->setValue('data', json_encode($recordData, JSON_PRETTY_PRINT));
+        return $record;
     }
 
 

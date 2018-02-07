@@ -2,24 +2,14 @@
 
 namespace ImGrowth\Repository;
 
-use ImGrowth\Node\Node as NodeEntity;
+
 use Phi\Database\Source;
 use Phi\Model\Entity;
-use Phi\Model\Interfaces\Storage;
 
-class NodeRecord implements Storage
+
+class NodeRecord extends \ImGrowth\Repository
 {
 
-    /**
-     * @var Source
-     */
-    private $database;
-
-
-    public function __construct($database)
-    {
-        $this->database = $database;
-    }
 
     public function initialize()
     {
@@ -35,6 +25,33 @@ class NodeRecord implements Storage
 
 
         return $this;
+    }
+
+
+    public function getRecordsByNodeId($nodeId)
+    {
+        $query = "
+            SELECT * FROM node_record
+            WHERE
+              node_id = :nodeId
+            ORDER BY date
+        ";
+
+        $values = $this->database->queryAndFetch($query, array(
+            ':nodeId' => $nodeId
+        ));
+
+        $records =array();
+
+        foreach ($values as $data) {
+            $record = new \ImGrowth\Entity\NodeRecord($this);
+            $record->setValues($data);
+            $records[] = $record;
+        }
+
+        return $records;
+
+
     }
 
     public function reset()

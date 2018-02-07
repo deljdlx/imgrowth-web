@@ -6,61 +6,47 @@ use ImGrowth\Entity\Node;
 use ImGrowth\Repository\NodeRecord;
 use Phi\Database\Source;
 
-class Repository
+abstract class Repository extends \Phi\Model\Repository
 {
-
-    /**
-     * @var Source
-     */
-    private $database;
-
-
-    public function __construct($database)
-    {
-        $this->database = $database;
-
-        $this->nodeStorage = new \ImGrowth\Repository\Node($database);
-        $this->nodeRecordStorage = new NodeRecord($database);
-    }
 
 
     public function initialize()
     {
-        $this->nodeStorage->initialize();
-        $this->nodeRecordStorage->initialize();
+        $this->nodeRepository->initialize();
+        $this->nodeRecordRepository->initialize();
         return $this;
     }
 
     public function reset()
     {
-        $this->nodeStorage->reset();
-        $this->nodeRecordStorage->reset();
+        $this->nodeRepository->reset();
+        $this->nodeRecordRepository->reset();
         return $this;
     }
 
 
     public function getAllNodes()
     {
-        return $this->nodeStorage->getAll();
+        return $this->nodeRepository->getAll();
     }
 
 
     public function storeNode(Node $node)
     {
-        $this->nodeStorage->store($node);
+        $this->nodeRepository->store($node);
         return $this;
     }
 
 
     public function storeNodeRecord(\ImGrowth\Entity\NodeRecord $record)
     {
-        $this->nodeRecordStorage->store($record);
+        $this->nodeRecordRepository->store($record);
     }
 
 
     public function nodeExists(Node $node)
     {
-        return $this->nodeStorage->exists($node);
+        return $this->nodeRepository->exists($node);
     }
 
 

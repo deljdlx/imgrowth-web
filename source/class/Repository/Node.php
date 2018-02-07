@@ -3,23 +3,12 @@
 namespace ImGrowth\Repository;
 
 use ImGrowth\Entity\Node as NodeEntity;
-use Phi\Database\Source;
+use ImGrowth\Repository;
 use Phi\Model\Entity;
-use Phi\Model\Interfaces\Storage;
 
-class Node implements Storage
+
+class Node extends Repository
 {
-
-    /**
-     * @var Source
-     */
-    private $database;
-
-
-    public function __construct($database)
-    {
-        $this->database = $database;
-    }
 
 
     public function initialize()
@@ -27,6 +16,8 @@ class Node implements Storage
         $query = "
             CREATE TABLE node (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
+              
+              node_id varchar(15),
               
               version varchar(15),
               firmware  varchar(15),
@@ -46,6 +37,45 @@ class Node implements Storage
         $this->database->query($query);
 
         return $this;
+    }
+
+    public function getNodeByMeta($meta) {
+
+        $query = "
+            SELECT * FROM node
+            WHERE
+              node_id = :nodeId
+        ";
+
+
+        $data = $this->database->queryAndFetchOne($query, array(
+            ':nodeId' => $meta->id
+        ));
+
+        $node = new \ImGrowth\Entity\Node();
+        $node->setRepository($this);
+
+        $node->setValues($data);
+
+        return $node;
+    }
+
+    public function getNodeById($id) {
+        $query = "
+            SELECT * FROM node
+            WHERE
+              id = :nodeId
+        ";
+
+        $data = $this->database->queryAndFetchOne($query, array(
+            ':nodeId' => $id
+        ));
+
+        $node = new \ImGrowth\Entity\Node();
+        $node->setRepository($this);
+        $node->setValues($data);
+
+        return $node;
     }
 
 
@@ -90,26 +120,48 @@ class Node implements Storage
     public function store(Entity $node)
     {
 
-        if (!$this->exists($node)) {
+        if (!$this->exists($node) || 1) {
             $ip = $node->getValue('ip');
+
+
+            $mac = $node->getValue('mac');
+            $nodeId = $node->getValue('node_id');
+
             $version = $node->getValue('version');
             $dataURI = $node->getValue('data_uri');
+            $data = $node->getValue('data');
+            $firmware = $node->getValue('firmware');
 
             $query = "
                 INSERT INTO node (
+                  node_id,
                   ip,
+                  mac,
                   ping_time,
                   creation_date,
+                  
                   version,
+                  firmware,
+                  
+                  data,
+                  
                   data_uri
                 ) VALUES (
+                  " . $this->database->escape($nodeId) . ",
                   " . $this->database->escape($ip) . ",
+                  " . $this->database->escape($mac) . ",
                   " . $this->database->escape(date('Y-m-d H:i:s')) . ",
                   " . $this->database->escape(date('Y-m-d H:i:s')) . ",
+                  
+                  
                   " . $this->database->escape($version) . ",
+                  " . $this->database->escape($firmware) . ",
+                  
+                  " . $this->database->escape($data) . ",
                   " . $this->database->escape($dataURI) . "
                 )
             ";
+
             $this->database->query($query);
             $node->setValue('id', $this->database->getLastInsertId());
         }

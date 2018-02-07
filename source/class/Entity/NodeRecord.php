@@ -22,6 +22,11 @@ class NodeRecord extends Entity
     );
 
 
+    public function getData() {
+        return json_decode($this->getValue('data'));
+    }
+
+
     /**
      * @param Node $node
      * @return $this

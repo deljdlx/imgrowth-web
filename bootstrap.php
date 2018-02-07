@@ -16,20 +16,15 @@ $application = new \Phi\Application\Application(__DIR__);
 $application->getContainer()->set('database', function () {
     $fileName = 'sqlite:' . __DIR__ . '/data/imgrowth.sqlite';
     $driver = new \Phi\Database\Driver\PDO\Source($fileName);
-    return $driver;
+
+    $database = new \Phi\Database\Source($driver);
+
+    return $database;
 });
-
-
-$application->getContainer()->set('repository', function () use ($application) {
-    $storage = new \ImGrowth\Repository(
-        $application->getContainer()->get('database')
-    );
-    return $storage;
-});
-
 
 
 $application->getContainer()->set('nodeRepository', function () use ($application) {
+
     return new \ImGrowth\Repository\Node(
         $application->getContainer()->get('database')
     );
