@@ -9,6 +9,8 @@ ImGrowth.Seed = function()
     this.lightOffURL = 'index.php/node/lightOff';
     this.lightOnURL = 'index.php/node/lightOn';
 
+    this.getHistoryDataURL='index.php/node/1/getRecords';
+
 
 };
 
@@ -25,17 +27,29 @@ ImGrowth.Seed.prototype.getConfiguration = function(callback) {
 
 ImGrowth.Seed.prototype.saveHumidityConfiguration = function(values, callback) {
 
-    console.debug(values);
-
     $.ajax({
         url: this.saveHumidityConfigurationURL,
         method: 'post',
         data: {humidity : values},
         success: function(data) {
             console.debug(data);
-            callback(data);
+            callback(data.data);
         }
     })
+
+};
+
+
+ImGrowth.Seed.prototype.getHistoryData = function(callback) {
+
+    $.ajax({
+        url: this.getHistoryDataURL,
+        cache: false,
+        success: function(data) {
+            console.debug(data);
+            callback(data);
+        }
+    });
 
 };
 
@@ -46,7 +60,7 @@ ImGrowth.Seed.prototype.getData = function(callback) {
         url: this.getDataURL,
         success: function(data) {
             console.debug(data);
-            callback(data);
+            callback(data.data);
         }
     })
 };

@@ -39,9 +39,9 @@
 </head>
 <body>
 
-
+<!--
 <input type="file" accept="image/*;capture=camera">
-
+//-->
 
 <div class="fieldset">
 
@@ -49,17 +49,47 @@
 
     <div class="node-data row">
 
-        <div class="col-lg-6 col-md-6">
+        <div class="col-lg-3 col-md-3">
             <i class="fas fa-thermometer-quarter fa-7x" style="color: #AA0000"></i>
             <span id="temperature" class="mesure"></span>
         </div>
 
-        <div class="col-lg-6 col-md-6">
+        <div class="col-lg-3 col-md-3">
             <i class="fas fa-sun fa-7x" style="color: #f0ad4e"></i>
             <span id="light" class="mesure"></span>
         </div>
     </div>
 </div>
+
+
+
+
+
+
+<div class="fieldset">
+    <h1><span>Lumière et température</span></h1>
+    <div>
+        <div id="temperatureGraph" style="width: 100%;height:400px;"></div>
+    </div>
+</div>
+
+
+
+<div class="fieldset">
+    <h1><span>Humidité</span></h1>
+
+    <div>
+        <div id="humidityGraph" style="width: 100%;height:400px;"></div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
 
 
 <div class="fieldset">
@@ -72,13 +102,13 @@
             <div id="CircleGauge-0" class="circleGraph" data-value="0.6">
                 <div class="graph">
                     <div class="circle">
-                        <img src="https://blogschizo.files.wordpress.com/2015/04/stickers-plante-verte.png"
+                        <img src="asset/stickers-plante-verte.png"
                              alt="fixture/juniac.jpg">
                     </div>
                     <div class="value"></div>
                 </div>
             </div>
-            <div><h3 style="text-align: center">Pot n°0<h3></div>
+            <div style="clear: both"><h3 style="">Pot n°0<h3></div>
         </div>
 
 
@@ -86,13 +116,13 @@
             <div id="CircleGauge-1" class="circleGraph" data-value="0.8">
                 <div class="graph">
                     <div class="circle">
-                        <img src="https://blogschizo.files.wordpress.com/2015/04/stickers-plante-verte.png"
+                        <img src="asset/stickers-plante-verte.png"
                              alt="fixture/juniac.jpg">
                     </div>
                     <div class="value"></div>
                 </div>
             </div>
-            <div><h3 style="text-align: center">Pot n°1<h3></div>
+            <div style="clear: both"><h3 style="">Pot n°1<h3></div>
         </div>
 
 
@@ -100,13 +130,13 @@
             <div id="CircleGauge-2" class="circleGraph" data-value="0.3">
                 <div class="graph">
                     <div class="circle">
-                        <img src="https://blogschizo.files.wordpress.com/2015/04/stickers-plante-verte.png"
+                        <img src="asset/stickers-plante-verte.png"
                              alt="fixture/juniac.jpg">
                     </div>
                     <div class="value"></div>
                 </div>
             </div>
-            <div><h3 style="text-align: center">Pot n°2<h3></div>
+            <div style="clear: both"><h3 style="">Pot n°2<h3></div>
         </div>
 
 
@@ -114,13 +144,13 @@
             <div id="CircleGauge-3" class="circleGraph" data-value="0.5">
                 <div class="graph">
                     <div class="circle">
-                        <img src="https://blogschizo.files.wordpress.com/2015/04/stickers-plante-verte.png"
+                        <img src="asset/stickers-plante-verte.png"
                              alt="fixture/juniac.jpg">
                     </div>
                     <div class="value"></div>
                 </div>
             </div>
-            <div><h3 style="text-align: center">Pot n°3<h3></div>
+            <div style="clear: both"><h3 style="">Pot n°3<h3></div>
         </div>
 
 
@@ -192,9 +222,6 @@
 
     <div class="nodeConfiguration" style="padding: 16px;">
 
-
-
-
             <?php
             for ($i = 0; $i < 4; $i++) {
                 echo '<div class=" row">';
@@ -209,12 +236,16 @@
                 echo '</div>';
             }
             ?>
-
-
     </div>
+
 </div>
 
-<div id="main" style="width: 600px;height:400px;"></div>
+
+
+
+
+
+
 
 
 <script src="vendor/x_material_kit_free_v1.1.1/assets/js/jquery.min.js" type="text/javascript"></script>
@@ -266,35 +297,11 @@
 <script src="javascript/bootstrap.js" type="text/javascript"></script>
 
 
-<!--
+
 <script type="text/javascript">
-    // based on prepared DOM, initialize echarts instance
-    var myChart = echarts.init(document.getElementById('main'));
 
-    // specify chart configuration item and data
-    var option = {
-        title: {
-            text: 'ECharts entry example'
-        },
-        tooltip: {},
-        legend: {
-            data: ['Sales']
-        },
-        xAxis: {
-            data: ["shirt", "cardign", "chiffon shirt", "pants", "heels", "socks"]
-        },
-        yAxis: {},
-        series: [{
-            name: 'Sales',
-            type: 'bar',
-            data: [5, 20, 36, 10, 10, 20]
-        }]
-    };
-
-    // use configuration item and data specified to show chart
-    myChart.setOption(option);
 </script>
-//-->
+
 
 </body>
 </html>

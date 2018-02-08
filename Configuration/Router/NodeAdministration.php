@@ -28,6 +28,7 @@ class NodeAdministration
 
             $data =array(
                 "time" => time(),
+                //"postDataDelay" => 600000,
                 "date" => date('Y-m-d H:i'),
                 "version" => "0.0.1",
                 "humidity" => array(
