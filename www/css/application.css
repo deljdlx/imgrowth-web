@@ -19,7 +19,9 @@ h3 {
 }
 
 
-
+img {
+    image-orientation: from-image;
+}
 
 
 

@@ -19,6 +19,10 @@ $nodeRouteConfiguration = new \ImGrowth\Configuration\Router\NodeAdministration(
 $nodeRouteConfiguration->registerRoutes($router);
 
 
+$newsRouteConfiguration = new \ImGrowth\Configuration\Router\News($application);
+$newsRouteConfiguration->registerRoutes($router);
+
+
 //=======================================================
 
 

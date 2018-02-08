@@ -11,6 +11,11 @@ ImGrowth.Application = function()
     this.humiditySliders=[];
 
 
+    this.humidityGraphSelector = '#humidityGraph';
+    this.temperatureGraphSelector = '#temperatureGraph';
+
+
+
     $('a.water-trigger').each(function(index, trigger) {
         trigger.manager = this;
     }.bind(this));
@@ -67,22 +72,8 @@ ImGrowth.Application.prototype.setHumiditySlidersValues = function(values) {
 
 
 ImGrowth.Application.prototype.historicGraph = function(data) {
-
-
-    var precision = 10;
-    var temperatures=[];
-    var lights=[];
-    var dates = [];
-    var i =0;
-    var lastTemperature = null;
-    var temperatureDelta = 5;
-
-
     this.temperatureAndLightGraph(data);
     this.humidityGraph(data);
-
-
-
 };
 
 
@@ -171,10 +162,12 @@ ImGrowth.Application.prototype.humidityGraph = function(data) {
 
 
     // based on prepared DOM, initialize echarts instance
-    var humidityChart = echarts.init(document.getElementById('humidityGraph'));
+    var humidityChart = echarts.init(
+        $(this.humidityGraphSelector).get(0)
+    );
 
 
-    option = {
+    var option = {
         xAxis: {
             type: 'category',
             data: dates,
@@ -213,7 +206,7 @@ ImGrowth.Application.prototype.humidityGraph = function(data) {
 
 ImGrowth.Application.prototype.temperatureAndLightGraph = function(data) {
 
-    var precision = 10;
+    var precision = 8;
 
     var temperatures=[];
     var lights=[];
@@ -247,10 +240,12 @@ ImGrowth.Application.prototype.temperatureAndLightGraph = function(data) {
 
 
     // based on prepared DOM, initialize echarts instance
-    var myChart = echarts.init(document.getElementById('temperatureGraph'));
+    var myChart = echarts.init(
+        $(this.temperatureGraphSelector).get(0)
+    );
 
 
-    option = {
+    var option = {
         tooltip: {
             trigger: 'axis',
             formatter: '{b0}<br/> {c0}°C</br>{c1} lux'
@@ -352,8 +347,6 @@ ImGrowth.Application.prototype.start = function() {
 
             var node = $('#CircleGauge-'+i);
             node.get(0).setAttribute('data-value', value);
-
-            console.debug($(node));
 
             $(node).find('.value').html(data.humidity[i]);
 

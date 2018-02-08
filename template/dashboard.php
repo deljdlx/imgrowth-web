@@ -65,6 +65,20 @@
 
 
 
+<div class="fieldset">
+    <h1><span>Enregistrer une étape</span></h1>
+    <div>
+        <textarea name="newContent" style="width:100%"></textarea>
+        <input style="" id="myFileInput" type="file" accept="image/*;capture=camera">
+    </div>
+    <div id="imagePreview"></div>
+</div>
+
+
+
+
+
+
 
 <div class="fieldset">
     <h1><span>Lumière et température</span></h1>
@@ -208,8 +222,6 @@
 <div class="fieldset">
     <h1><span>Réglages humidité</span></h1>
 
-
-
     <div class="btn-group btn-group-justified btn-group-raised">
         <a href="javascript:void(0)" class="btn " id="calibrate0">Calibrage humidité 0%</a>
         <a href="javascript:void(0)" class="btn " id="calibrate1">Calibrage humidité 100%</a>
@@ -237,14 +249,179 @@
             }
             ?>
     </div>
-
 </div>
 
 
 
+<script src="vendor/exif-js/exif.js" type="text/javascript"></script>
 
 
 
+<script>
+var myInput = document.getElementById('myFileInput');
+
+
+function readFile(file) {
+
+    var reader = new FileReader();
+
+
+
+    reader.readAsDataURL(file);
+    //reader.is
+
+    reader.onloadend = function(evt) {
+
+        var dataURL = reader.result;
+
+
+        var maxWidth = 600;
+        var maxHeight = 600;
+
+
+        var image = new Image();
+        image.src = dataURL;
+
+        image.onload = function () {
+
+
+
+            var width = image.width;
+            var height = image.height;
+            var shouldResize = (width > maxWidth) || (height > maxHeight);
+
+            if (!shouldResize) {
+                sendFile(dataURL);
+                return;
+            }
+            else {
+
+                var orientation = null;
+                EXIF.getData(image, function() {
+                    console.debug(EXIF.pretty(this));
+                    orientation = EXIF.getTag(this, "Orientation");
+                });
+
+
+                var newWidth;
+                var newHeight;
+
+                if (width > height) {
+                    newHeight = height * (maxWidth / width);
+                    newWidth = maxWidth;
+                } else {
+                    newWidth = width * (maxHeight / height);
+                    newHeight = maxHeight;
+                }
+
+                var canvas = document.createElement('canvas');
+
+
+                var context = canvas.getContext('2d');
+
+                if(orientation == 1) {
+                    canvas.width = newWidth;
+                    canvas.height = newHeight;
+                    context.drawImage(this, 0, 0, newWidth, newHeight);
+                }
+
+                if(orientation == 8) {
+                    canvas.width = newHeight;
+                    canvas.height = newWidth;
+                    context.translate(newWidth/2, newHeight/2)
+                    context.rotate(-90*Math.PI/180);
+                    context.drawImage(this, newWidth/4, 0, -newWidth,  -newHeight);
+                }
+
+                if(orientation == 6) {
+                    canvas.width = newHeight;
+                    canvas.height = newWidth;
+                    context.translate(newWidth/2, newHeight/2)
+                    context.rotate(90*Math.PI/180);
+                    context.drawImage(this, -newWidth/4, 0, newWidth,  newHeight);
+                }
+
+                if(orientation == 3) {
+                    canvas.width = newWidth;
+                    canvas.height = newHeight;
+
+                    context.translate(newWidth/2, newHeight/2)
+                    context.rotate(-180*Math.PI/180);
+
+                    context.drawImage(this, -newWidth/2, -newHeight/2, newWidth,  newHeight);
+                }
+
+                dataURL = canvas.toDataURL(file.type);
+
+                $('#imagePreview').append(canvas);
+
+                sendFile(dataURL);
+            }
+        }
+    };
+}
+
+
+
+function sendFile(fileData) {
+
+    var formData = new FormData();
+
+
+    formData.append('photo', fileData);
+
+    $.ajax({
+        type: 'POST',
+        url: 'index.php/photo/post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            console.debug(data);
+        },
+        error: function (data) {
+            alert('There was an error uploading your file!');
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+function sendPic() {
+
+    var file = myInput.files[0];
+    readFile(file);
+
+
+
+
+    /*
+    var formData = new FormData();
+    formData.append("photo", file, file.name);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'index.php/photo/post', true);
+// Set up a handler for when the request finishes.
+    xhr.onload = function (data) {
+        if (xhr.status === 200) {
+            // File(s) uploaded.
+            alert(JSON.stringify(xhr.responseText));
+        } else {
+            alert('An error occurred!');
+        }
+    };
+    xhr.send(formData);
+    */
+}
+
+myInput.addEventListener('change', sendPic, false);
+</script>
 
 
 
