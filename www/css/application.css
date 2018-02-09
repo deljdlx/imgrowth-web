@@ -1,10 +1,14 @@
 
 body {
     background-color: #FFF;
-    margin: 8px;
-    padding: 8px;
     font-family: sans-serif;
 }
+
+div.main {
+    margin: 8px;
+    padding: 8px;
+}
+
 
 
 h3 {

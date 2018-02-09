@@ -48,7 +48,9 @@
       "source/helper.php",
       "static_vendor/guzzlehttp/guzzle/src/functions_include.php",
       "static_vendor/guzzlehttp/promises/src/functions_include.php",
-      "static_vendor/guzzlehttp/psr7/src/functions_include.php"
+      "static_vendor/guzzlehttp/psr7/src/functions_include.php",
+
+      "static_vendor/php-graph-sdk-5.x/src/Facebook/polyfills.php"
     ],
     "psr-4": {
       "ImGrowth\\": "source/class",
@@ -60,7 +62,11 @@
 
       "GuzzleHttp\\": "static_vendor/guzzlehttp/guzzle/src/",
       "GuzzleHttp\\Promise\\": "static_vendor/guzzlehttp/promises/src/",
-      "GuzzleHttp\\Psr7\\": "static_vendor/guzzlehttp/psr7/src/"
+      "GuzzleHttp\\Psr7\\": "static_vendor/guzzlehttp/psr7/src/",
+
+      "Facebook\\": "static_vendor/php-graph-sdk-5.x/src/Facebook/"
+
+
     }
   }
 }

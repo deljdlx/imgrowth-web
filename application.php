@@ -26,55 +26,18 @@ $newsRouteConfiguration->registerRoutes($router);
 //=======================================================
 
 
-
-
-
-/*
-$router->get('node/getData', '`/getNodeData`', function () use ($application) {
-
-    $storage = $application->getContainer()->get('storage');
-    $nodes = $storage->getAllNodes();
-    $nodesData = array();
-
-
-    foreach ($nodes as $node) {
-        $data = $node->getData();
-
-        $nodeRecord=$application->getContainer()->get('nodeRecord');
-
-        $nodesData[] = array(
-            'node' => $node,
-            'data' => $data
-        );
-
-        $nodeRecord->setValue('data', json_encode($data));
-        $nodeRecord->setNode($node);
-        $nodeRecord->store();
-    }
-
-
-    echo json_encode($nodesData);
-
-
-    return true;
-});
-*/
-
-
-
-
-//=======================================================
-
-
-
-
-
-
-
-
 $router->get('index', '`.*`', function () use ($application) {
-    include(__DIR__.'/template/dashboard.php');
+
+    $layout =  new \ImGrowth\Layout\Dashboard\Main();
+    echo $layout->render();
 });
+
+$router->get('content/graph', '`/content/graph`', function () use ($application) {
+    $layout =  new \ImGrowth\Layout\Dashboard\Main();
+    echo $layout->render();
+});
+
+
 
 
 

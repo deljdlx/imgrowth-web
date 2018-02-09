@@ -38,9 +38,8 @@ class NodeAdministration
                     3 => 2000
                 )
             );
-            header('Content-type: application/json');
             echo json_encode($data);
-        });
+        })->json();
 
 
         $router->get('server/initialize', '`/server/initialize`', function () use ($application) {
@@ -56,9 +55,9 @@ class NodeAdministration
                 'message' => 'System initialized'
             );
 
-            header('Content-type: application/json');
+
             echo json_encode($data);
-        });
+        })->json();
 
 
 
@@ -86,14 +85,11 @@ class NodeAdministration
             $nodeRepository = $application->getContainer()->get('nodeRepository');
             $nodeRepository->store($node);
 
-            //file_put_contents('dump.php', json_encode($data, JSON_PRETTY_PRINT));
 
-            header('Content-type: application/json');
             echo json_encode($node);
 
 
-            //die('EXIT '.__FILE__.'@'.__LINE__);
-        });
+        })->json();
 
 
 
@@ -162,9 +158,8 @@ class NodeAdministration
         $router->get('node/getConfiguration', '`/node/getConfiguration`', function () {
 
             $content = file_get_contents('http://192.168.0.15/node/getConfiguration');
-            header('Content-type: application/json');
             echo $content;
-        });
+        })->json();
 
 
         return$router;
