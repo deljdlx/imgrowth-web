@@ -82,5 +82,5 @@ $router->get('index', '`.*`', function () use ($application) {
 
 $application->run();
 
-echo $application->getOutput();
+echo $application->send();
 

@@ -27,48 +27,48 @@ class  News
 
         $application = $this->application;
 
-        $router->get('ff', '`/ff`', function () use ($application) {
 
 
-            $data = file_get_contents(__DIR__.'/dump.php');
+        $router->get('oauth/wordpress', '`/oauth/wordpress$`', function () use ($application) {
 
+            $server = $application->getContainer()->get('wordpressOAuth');
+            $session = $application->getContainer()->get('session');
 
+            $temporaryCredentials = $server->getTemporaryCredentials();
 
-            //file_put_contents(__DIR__.'/dump.php', $data);
+            // Store the credentials in the session.
+            $session->set('temporary_credentials', serialize($temporaryCredentials));
 
-            $imageMime = preg_replace('`(.*?,).*`', '$1', $data);
-
-            $extension  = preg_replace('`.*?image/(.*?);.*`', '$1', $data);
-
-            $imageData = str_replace($imageMime, '', $data);
-            $imageBinary = base64_decode($imageData);
-
-            die('EXIT '.__FILE__.'@'.__LINE__);
-
-            header('Content-type: image/jpeg');
-            echo $imageBinary;
-
-            /*
-            $fileName = uniqid().'.'.$extension;
-            $destination = APPLICATION_ROOT."/www/content/photo/".$fileName;
-            file_put_contents($destination, imageBinary);
-
-
-            header('Content-type: application/json');
-            echo json_encode(getimagesize($destination));
-            */
-
+            $server->authorize($temporaryCredentials);
 
         });
+
+
+        $router->get('oauth/wordpress/callback', '`/oauth/wordpress/callback`', function () use ($application) {
+
+            $server = $application->getContainer()->get('wordpressOAuth');
+            $session = $application->getContainer()->get('session');
+
+
+            $temporaryCredentials = unserialize($session->get('temporary_credentials'));
+            $tokenCredentials = $server->getTokenCredentials($temporaryCredentials, $_GET['oauth_token'], $_GET['oauth_verifier']);
+            $session->delete('temporary_credentials');
+            $session->set('wordpress_token', serialize($tokenCredentials));
+
+            file_put_contents(APPLICATION_ROOT.'/data/wordpress-token.txt', serialize($tokenCredentials));
+
+            $session->close();
+        });
+
+
+
+
+
 
         $router->post('photo/post', '`/photo/post`', function () use ($application) {
 
 
             $data = $_POST['photo'];
-
-            file_put_contents(__DIR__.'/dump.php', $data);
-
-            //$imageMime = preg_replace('`(.*?,).*`', '$1', $data);
             $extension  = preg_replace('`.*?image/(.*?);.*`', '$1', $data);
 
             $imageData = preg_replace('`(.*?,)`', '', $data);
@@ -79,11 +79,40 @@ class  News
             file_put_contents($destination, $imageBinary);
 
 
-            header('Content-type: application/json');
+            $token = unserialize(file_get_contents(APPLICATION_ROOT.'/data/wordpress-token.txt'));
+
+
+
+            $server = $application->getContainer()->get('wordpressOAuth');
+            $server->setToken($token);
+
+            $content = $server->postImage($destination);
+            $imageData = json_decode($content);
+
+
+
+            $node = $application->getContainer()->get('nodeService');
+
+            $nodeData = $node->getData();
+
+
+
+            $src = $imageData->media_details->sizes->medium->source_url;
+            $html='<div><img src="'.$src.'"/></div>
+                <ul>
+                    <li>Temperature : '.$nodeData->data->temperature.'°C</li>
+                    <li>Lumière : '.$nodeData->data->light.' lux</li>
+                </ul>
+            ';
+
+            $title = date('Y-m-d H:i')." I'm Growth !";
+
+            $server->postArticle($title, $html);
+
             echo json_encode(getimagesize($destination));
 
 
-        });
+        })->json();
 
 
         return $router;

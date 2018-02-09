@@ -4,8 +4,10 @@ namespace ImGrowth\Configuration\Router;
 
 
 
+use ImGrowth\WordpressOAuth;
 use Phi\Application\Application;
 use Phi\Routing\Interfaces\Router;
+use Phi\Session\Session;
 
 class Main
 {
@@ -21,32 +23,53 @@ class Main
 
     public function registerRoutes(Router$router) {
 
+
         $application = $this->application;
 
 
+
+
+
+
+
+
+
+
+
+
+
         $router->get('node/water', '`/node/water(\d)`', function ($index) use ($application) {
-            header('Content-type: application/json');
             $content = file_get_contents('http://192.168.0.15/node/water'.$index);
             echo $content;
-        });
+        })->json();
+
+
 
         $router->get('node/lightOff', '`/node/lightOff`', function () use ($application) {
-            header('Content-type: application/json');
-            $content = file_get_contents('http://192.168.0.15/node/lightOff');
-            echo $content;
-        });
+            $node = $application->get('nodeService');
+            echo json_encode(
+               $node->lightOff()
+            );
+        })->json();
+
+
 
         $router->get('node/lightOn', '`/node/lightOn`', function () use ($application) {
-            header('Content-type: application/json');
-            $content = file_get_contents('http://192.168.0.15/node/lightOn');
-            echo $content;
-        });
+            $node = $application->get('nodeService');
+            echo json_encode(
+                $node->lightOn()
+            );
+        })->json();
+
+
 
         $router->get('node/getData', '`/node/getData`', function () use ($application) {
-            header('Content-type: application/json');
-            $content = file_get_contents('http://192.168.0.15/node/getData');
+            $node = $application->get('nodeService');
+            $content = json_encode($node->getData());
             echo $content;
-        });
+        })->json();
+
+
 
         $router->get('node/getRecords', '`/node/(\d+)/getRecords`', function ($nodeId) use ($application) {
             $nodeRepository = $application->getContainer()->get('nodeRepository');
@@ -77,12 +100,10 @@ class Main
                 }
             }
 
-
-            header('Content-type: application/json');
             echo json_encode($data);
 
 
-        });
+        })->json();
 
 
 
@@ -105,10 +126,8 @@ class Main
             $recordRepository = $application->getContainer()->get('nodeRecordRepository');
             $recordRepository->store($record);
 
-            header('Content-type: application/json');
-
             echo $content;
-        });
+        })->json();
 
 
 

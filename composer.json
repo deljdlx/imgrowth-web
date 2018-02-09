@@ -45,11 +45,22 @@
 
   "autoload": {
     "files": [
-      "source/helper.php"
+      "source/helper.php",
+      "static_vendor/guzzlehttp/guzzle/src/functions_include.php",
+      "static_vendor/guzzlehttp/promises/src/functions_include.php",
+      "static_vendor/guzzlehttp/psr7/src/functions_include.php"
     ],
     "psr-4": {
       "ImGrowth\\": "source/class",
-      "ImGrowth\\Configuration\\": "Configuration"
+      "ImGrowth\\Configuration\\": "Configuration",
+
+      "League\\OAuth1\\": "static_vendor/League/OAuth1/src",
+
+      "Psr\\Http\\Message\\": "static_vendor/psr/http-message/src/",
+
+      "GuzzleHttp\\": "static_vendor/guzzlehttp/guzzle/src/",
+      "GuzzleHttp\\Promise\\": "static_vendor/guzzlehttp/promises/src/",
+      "GuzzleHttp\\Psr7\\": "static_vendor/guzzlehttp/psr7/src/"
     }
   }
 }

@@ -86,6 +86,10 @@ ImGrowth.Application.prototype.humidityGraph = function(data) {
 
     var dateInitialized = false;
 
+
+    console.debug(data);
+
+
     for(var i=0; i<data.humidity.length; i++) {
 
         var values = [];
