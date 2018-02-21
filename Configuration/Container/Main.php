@@ -44,6 +44,18 @@ class Main
             );
         });
 
+        $this->application->getContainer()->set('accountRepository', function () use ($application) {
+            return new \ImGrowth\Repository\Account(
+                $application->getContainer()->get('database')
+            );
+        });
+
+
+
+
+
+
+
 
 
         $this->application->getContainer()->set('nodeService', function () use ($application) {

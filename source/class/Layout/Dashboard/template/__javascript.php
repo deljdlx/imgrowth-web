@@ -63,33 +63,11 @@
 
 <script>
 
-
-    var myInput = document.getElementById('myFileInput');
-    myInput.addEventListener('change', function() {
-
-
-        var file = myInput.files[0];
-
-
-        var test = new ImGrowth.Photo({
-            onSelection: function(image) {
-                $('#imagePreview').append(image);
-            }
-        });
-        test.send('index.php/photo/post', 'photo', file);
-
-
-        //test.
-
-
-
-        //readFile(file);
-
-    }, false);
-</script>
-
-
-
-<script type="text/javascript">
+    $('#camTrigger').click(function() {
+        $('#myFileInput').fireEvent('click');
+    });
 
 </script>
+
+
+

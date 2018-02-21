@@ -133,11 +133,77 @@ class Main
 
 
 
+
+
         $router->post('node/saveHumidityConfiguration', '`/node/saveHumidityConfiguration`', function () use ($application) {
 
-
-
         });
+
+
+
+
+
+
+
+        $router->get('content/graph', '`/content/graph`', function () use ($application) {
+            $layout =  new \ImGrowth\Layout\Dashboard\Main();
+            $layout->setActivePanel('graph');
+            echo $layout->render();
+        });
+
+        $router->get('content/photo', '`/content/photo`', function () use ($application) {
+            $layout =  new \ImGrowth\Layout\Dashboard\Main();
+            $layout->setActivePanel('photo');
+            echo $layout->render();
+        });
+
+        $router->get('content/action', '`/content/action`', function () use ($application) {
+            $layout =  new \ImGrowth\Layout\Dashboard\Main();
+            $layout->setActivePanel('action');
+            echo $layout->render();
+        });
+
+        $router->get('content/configuration', '`/content/configuration`', function () use ($application) {
+            $layout =  new \ImGrowth\Layout\Dashboard\Main();
+            $layout->setActivePanel('configuration');
+            echo $layout->render();
+        });
+
+
+        $router->get('index', '`.*`', function () use ($application) {
+
+
+
+            /*
+            $repository = $application->getContainer()->get('nodeRepository');
+            $nodes = $repository->getNodesByAccountId(1);
+            */
+
+            /*
+            echo '<pre id="' . __FILE__ . '-' . __LINE__ . '" style="border: solid 1px rgb(255,0,0); background-color:rgb(255,255,255)">';
+            echo '<div style="background-color:rgba(100,100,100,1); color: rgba(255,255,255,1)">' . __FILE__ . '@' . __LINE__ . '</div>';
+            print_r($nodes);
+            echo '</pre>';
+            */
+
+            /*
+            foreach ($nodes as $node) {
+                echo '<pre id="' . __FILE__ . '-' . __LINE__ . '" style="border: solid 1px rgb(255,0,0); background-color:rgb(255,255,255)">';
+                echo '<div style="background-color:rgba(100,100,100,1); color: rgba(255,255,255,1)">' . __FILE__ . '@' . __LINE__ . '</div>';
+                print_r($node->getAccount());
+                echo '</pre>';
+            }
+            */
+
+
+            //die('EXIT '.__FILE__.'@'.__LINE__);
+
+
+
+            $layout =  new \ImGrowth\Layout\Dashboard\Main();
+            echo $layout->render();
+        });
+
 
         return$router;
     }

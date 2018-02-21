@@ -8,6 +8,9 @@ class Node extends Entity
 {
 
     protected $values = array(
+
+        'account_id' => null,
+
         'ip' => null,
         'version' => null,
         'firmware' => null,
@@ -21,6 +24,9 @@ class Node extends Entity
 
         'data_uri' => null,
     );
+
+
+    protected $account = null;
 
 
     public function getId() {
@@ -56,6 +62,16 @@ class Node extends Entity
         $record->setValue('node_id', $this->getValue('id'));
         $record->setValue('data', json_encode($recordData, JSON_PRETTY_PRINT));
         return $record;
+    }
+
+
+    public function getAccount()
+    {
+        if($this->account === null) {
+            $repository = new \ImGrowth\Repository\Account($this->getRepository()->getSource());
+            $this->account = $repository->getAccountById($this->getValue('account_id'));
+        }
+        return $this->account;
     }
 
 

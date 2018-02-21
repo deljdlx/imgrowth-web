@@ -44,6 +44,11 @@ class NodeAdministration
 
         $router->get('server/initialize', '`/server/initialize`', function () use ($application) {
 
+
+            $repository = $application->getContainer()->get('accountRepository');
+            $repository->reset();
+
+
             $repository = $application->getContainer()->get('nodeRepository');
             $repository->reset();
 

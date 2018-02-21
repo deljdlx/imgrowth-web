@@ -11,10 +11,12 @@ class NodeRecord extends \ImGrowth\Repository
 {
 
 
+    protected static $tableName = 'node_record';
+
     public function initialize()
     {
         $query = "
-            CREATE TABLE node_record (
+            CREATE TABLE ".$this->getTableName()." (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
               node_id INTEGER, 
               date datetime,
@@ -31,7 +33,7 @@ class NodeRecord extends \ImGrowth\Repository
     public function getRecordsByNodeId($nodeId)
     {
         $query = "
-            SELECT * FROM node_record
+            SELECT * FROM ".$this->getTableName()."
             WHERE
               node_id = :nodeId
             ORDER BY date
@@ -56,7 +58,7 @@ class NodeRecord extends \ImGrowth\Repository
 
     public function reset()
     {
-        $this->database->query("DROP TABLE node_record");
+        $this->database->query("DROP TABLE ".$this->getTableName()."");
         $this->initialize();
         return $this;
     }
@@ -64,7 +66,7 @@ class NodeRecord extends \ImGrowth\Repository
     public function store(Entity $record)
     {
         $query = "
-            INSERT INTO node_record (
+            INSERT INTO ".$this->getTableName()." (
               node_id,
               date,
               data

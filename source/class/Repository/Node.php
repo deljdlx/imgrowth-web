@@ -10,14 +10,17 @@ use Phi\Model\Entity;
 class Node extends Repository
 {
 
+    protected static $tableName = 'node';
 
     public function initialize()
     {
         $query = "
-            CREATE TABLE node (
+            CREATE TABLE ".$this->getTableName()." (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
               
               node_id varchar(15),
+              
+              account_id  varchar(15),
               
               version varchar(15),
               firmware  varchar(15),
@@ -42,7 +45,7 @@ class Node extends Repository
     public function getNodeByMeta($meta) {
 
         $query = "
-            SELECT * FROM node
+            SELECT * FROM ".$this->getTableName()."
             WHERE
               node_id = :nodeId
         ";
@@ -62,7 +65,7 @@ class Node extends Repository
 
     public function getNodeById($id) {
         $query = "
-            SELECT * FROM node
+            SELECT * FROM ".$this->getTableName()."
             WHERE
               id = :nodeId
         ";
@@ -82,7 +85,7 @@ class Node extends Repository
 
     public function reset()
     {
-        $this->database->query("DROP TABLE node");
+        $this->database->query("DROP TABLE ".$this->getTableName()."");
         $this->initialize();
         return $this;
     }
@@ -101,7 +104,7 @@ class Node extends Repository
             creation_date,
             data_uri,
             data
-          from node
+          from ".$this->getTableName()."
         ";
 
 
@@ -109,6 +112,29 @@ class Node extends Repository
         $nodes = array();
         foreach ($rows as $values) {
             $node = new NodeEntity();
+            $node->setValues($values);
+            $nodes[] = $node;
+        }
+
+        return $nodes;
+    }
+
+
+    public function getNodesByAccountId($accountId)
+    {
+
+        $query = "
+            SELECT * FROM ".$this->getTableName()." node
+            WHERE account_id = :accountId
+        ";
+
+        $rows = $this->queryAndFetch($query, array(
+            ':accountId' => $accountId
+        ));
+
+        $nodes = array();
+        foreach ($rows as $values) {
+            $node = new \ImGrowth\Entity\Node($this);
             $node->setValues($values);
             $nodes[] = $node;
         }
@@ -127,14 +153,18 @@ class Node extends Repository
             $mac = $node->getValue('mac');
             $nodeId = $node->getValue('node_id');
 
+
+            $accountId = $node->getValue('account_id');
+
             $version = $node->getValue('version');
             $dataURI = $node->getValue('data_uri');
             $data = $node->getValue('data');
             $firmware = $node->getValue('firmware');
 
             $query = "
-                INSERT INTO node (
+                INSERT INTO ".$this->getTableName()." (
                   node_id,
+                  account_id,
                   ip,
                   mac,
                   ping_time,
@@ -148,6 +178,7 @@ class Node extends Repository
                   data_uri
                 ) VALUES (
                   " . $this->database->escape($nodeId) . ",
+                  " . $this->database->escape($accountId) . ",
                   " . $this->database->escape($ip) . ",
                   " . $this->database->escape($mac) . ",
                   " . $this->database->escape(date('Y-m-d H:i:s')) . ",
@@ -167,7 +198,7 @@ class Node extends Repository
         }
         else {
             $query = "
-                UPDATE node SET 
+                UPDATE ".$this->getTableName()." SET 
                   ping_time =" . $this->database->escape(date('Y-m-d H:i:s')) . "
             ";
             $this->database->query($query);
@@ -180,7 +211,7 @@ class Node extends Repository
         $query = "
             SELECT
               id
-            FROM node
+            FROM ".$this->getTableName()."
             WHERE ip=" . $this->database->escape($node->getValue('ip')) . "
         ";
 

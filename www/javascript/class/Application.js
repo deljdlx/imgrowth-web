@@ -27,7 +27,33 @@ ImGrowth.Application.prototype.water = function(index) {
 }
 
 
+
+ImGrowth.Application.prototype.initializePhotoPanel = function(index) {
+
+    var myInput = document.getElementById('myFileInput');
+    myInput.addEventListener('change', function () {
+
+
+        var file = myInput.files[0];
+
+
+        var test = new ImGrowth.Photo({
+            onSelection: function (image) {
+                $('#imagePreview').append(image);
+            }
+        });
+        test.send('index.php/photo/post', 'photo', file);
+    }, false);
+}
+
+
 ImGrowth.Application.prototype.initializeHumidySliders = function(values) {
+
+    if(!$('.humiditySlider').length) {
+        return false;
+    }
+
+
 
     for(var i=0 ; i<values.length; i++) {
 
@@ -65,7 +91,10 @@ ImGrowth.Application.prototype.initializeHumidySliders = function(values) {
 ImGrowth.Application.prototype.setHumiditySlidersValues = function(values) {
 
     for(var i=0 ; i<values.length; i++) {
-        this.humiditySliders[i].set(values[i]);
+        if(typeof(this.humiditySliders[i]) !='undefined') {
+            this.humiditySliders[i].set(values[i]);
+        }
+
     }
 };
 
@@ -88,6 +117,10 @@ ImGrowth.Application.prototype.humidityGraph = function(data) {
 
 
     console.debug(data);
+
+    if(!$(this.humidityGraphSelector).length) {
+        return false;
+    }
 
 
     for(var i=0; i<data.humidity.length; i++) {
@@ -224,6 +257,11 @@ ImGrowth.Application.prototype.temperatureAndLightGraph = function(data) {
     var temperatureDelta = 5;
 
 
+    if(!$(this.temperatureGraphSelector).length) {
+        return false;
+    }
+
+
     for(var datetime in data.temperature) {
         if(!(i%precision)) {
 
@@ -316,6 +354,10 @@ ImGrowth.Application.prototype.temperatureAndLightGraph = function(data) {
 ImGrowth.Application.prototype.start = function() {
     var manager = this;
 
+    if(document.getElementById('myFileInput')) {
+        this.initializePhotoPanel();
+    }
+
     this.initializeHumidySliders([0, 0, 0, 0]);
 
 
@@ -332,37 +374,27 @@ ImGrowth.Application.prototype.start = function() {
 
 
 
-
     this.seed.getData(function(data) {
 
         $('#temperature').html(data.temperature+'°C');
         $('#light').html(data.light+' lux');
 
 
-
-
         for(var i=0; i<data.humidity.length; i++) {
-
-
 
             var humidity = data.humidity[i];
 
             var value = -1/1100 * humidity + 5/4;
 
+
             var node = $('#CircleGauge-'+i);
-            node.get(0).setAttribute('data-value', value);
-
-            $(node).find('.value').html(data.humidity[i]);
-
-            var test = new DB_CircleGauge();
-
-            test.render(node);
+            if(node.length) {
+                node.get(0).setAttribute('data-value', value);
+                $(node).find('.value').html(data.humidity[i]);
+                var test = new DB_CircleGauge();
+                test.render(node);
+            }
         }
-
-
-
-
-
     });
 
 
@@ -380,6 +412,5 @@ ImGrowth.Application.prototype.start = function() {
             manager.seed.lightOff()
         }
     })
-
-
 };
+
