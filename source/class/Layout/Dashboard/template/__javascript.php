@@ -42,32 +42,19 @@
 <script src="vendor/echarts.min.js"></script>
 
 
-<script type="text/javascript">
-
-    $().ready(function () {
-
-
-    });
-
-</script>
 
 <script src="javascript/class/Application.js" type="text/javascript"></script>
+
+<script src="Component/Project/public/Project.js" type="text/javascript"></script>
+
+
 <script src="javascript/class/Seed.js" type="text/javascript"></script>
 
 <script src="javascript/class/Photo.js" type="text/javascript"></script>
 
 <script src="javascript/bootstrap.js" type="text/javascript"></script>
 
-
-
-
-<script>
-
-    $('#camTrigger').click(function() {
-        $('#myFileInput').fireEvent('click');
-    });
-
-</script>
+<script src="vendor/khi/bootstrap.js" type="text/javascript"></script>
 
 
 

@@ -1,3 +1,26 @@
+<?php
+
+$test = new ImGrowth\Component\Project\Controller();
+$test->create();
+
+?>
+
+<div class="fieldset">
+    <?php
+
+    $template = new \ImGrowth\Component\Project\View\Create();
+    echo $template->render();
+
+
+    ?>
+
+</div>
+
+
+
+
+
+
 <div class="fieldset">
 
     <h1><span>Environnement</span></h1>

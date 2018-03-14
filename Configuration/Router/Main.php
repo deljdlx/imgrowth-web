@@ -21,7 +21,7 @@ class Main
 
 
 
-    public function registerRoutes(Router$router) {
+    public function registerRoutes(Router $router) {
 
 
         $application = $this->application;

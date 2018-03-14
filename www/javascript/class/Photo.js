@@ -64,8 +64,10 @@ ImGrowth.Photo.prototype.add = function(fileName, file, callback) {
                     //$('#imagePreview').append(imagePreview);
                 }
 
+                if(Khi.isFunction(callback)) {
+                    callback(dataURL);
+                }
 
-                callback(dataURL);
 
                 return;
             }
@@ -84,7 +86,9 @@ ImGrowth.Photo.prototype.add = function(fileName, file, callback) {
                         //$('#imagePreview').append(imagePreview);
                     }
 
-                    callback(dataURL);
+                    if(Khi.isFunction(callback)) {
+                        callback(dataURL);
+                    }
 
                     return;
                 });
@@ -99,7 +103,6 @@ ImGrowth.Photo.prototype.add = function(fileName, file, callback) {
 ImGrowth.Photo.prototype.send = function(url, imageName, file) {
 
     this.add(imageName, file, function(data) {
-
         console.log('ici');
         this.sendFile(url, imageName, data)
     }.bind(this))

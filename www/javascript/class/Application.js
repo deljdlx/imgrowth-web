@@ -30,6 +30,11 @@ ImGrowth.Application.prototype.water = function(index) {
 
 ImGrowth.Application.prototype.initializePhotoPanel = function(index) {
 
+    $('#camTrigger').click(function() {
+        $('#myFileInput').fireEvent('click');
+    });
+
+
     var myInput = document.getElementById('myFileInput');
     myInput.addEventListener('change', function () {
 
@@ -45,6 +50,28 @@ ImGrowth.Application.prototype.initializePhotoPanel = function(index) {
         test.send('index.php/photo/post', 'photo', file);
     }, false);
 }
+
+
+
+
+
+ImGrowth.Application.prototype.initializeProjectPanel = function(index) {
+
+    var project = new ImGrowth.Project();
+    project.initializeCreationPanel();
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ImGrowth.Application.prototype.initializeHumidySliders = function(values) {
@@ -353,6 +380,14 @@ ImGrowth.Application.prototype.temperatureAndLightGraph = function(data) {
 
 ImGrowth.Application.prototype.start = function() {
     var manager = this;
+
+
+
+
+    if(document.getElementById('projectPhotoTrigger')) {
+        this.initializeProjectPanel();
+    }
+
 
     if(document.getElementById('myFileInput')) {
         this.initializePhotoPanel();

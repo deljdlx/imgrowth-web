@@ -25,6 +25,15 @@ $defaultRouteConfiguration = new \ImGrowth\Configuration\Router\Main($applicatio
 $defaultRouteConfiguration->registerRoutes($router);
 
 
+
+$projectRouteConfiguration = new \ImGrowth\Component\Project\Router($application);
+
+$router->addRouter($projectRouteConfiguration, 'project', '`/project`');
+
+
+//$projectRouteConfiguration->registerRoutes($router, );
+
+
 //=======================================================
 
 
