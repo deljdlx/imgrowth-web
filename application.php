@@ -3,6 +3,13 @@ require(__DIR__.'/bootstrap.php');
 
 
 
+$application = new \Phi\Application\Application(__DIR__);
+
+
+$container = new \ImGrowth\Configuration\Container\Main();
+
+$application->setContainer($container);
+
 
 
 
@@ -35,8 +42,13 @@ $router->addRouter($projectRouteConfiguration, 'project', '`/project`');
 
 
 //=======================================================
-
-
+/*
+$_SERVER= array (
+    'REQUEST_METHOD' => 'GET',
+    'REQUEST_URI' => '/project/imgrowth-web/www/content/wp-json/wp/v2/posts',
+);
+include(__DIR__.'/www/content/index.php');
+*/
 
 
 

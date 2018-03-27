@@ -1,26 +1,27 @@
-<?php
 
-$test = new ImGrowth\Component\Project\Controller();
-$test->create();
 
-?>
+
 
 <div class="fieldset">
     <?php
-
-    $template = new \ImGrowth\Component\Project\View\Create();
+    $template = new \ImGrowth\Component\Project\View\ProjectList();
     echo $template->render();
-
-
     ?>
-
 </div>
 
 
 
+<?php
+$template = new \ImGrowth\Component\Project\View\Create();
+echo $template->render();
+?>
 
 
 
+
+
+
+<!--
 <div class="fieldset">
 
     <h1><span>Environnement</span></h1>
@@ -38,13 +39,11 @@ $test->create();
         </div>
     </div>
 </div>
+//-->
 
 
 
-
-
-
-
+<!--
 <div class="fieldset">
 
     <h1><span>Humidité</span></h1>
@@ -105,7 +104,6 @@ $test->create();
             </div>
             <div style="clear: both"><h3 style="">Pot n°3<h3></div>
         </div>
-
-
     </div>
 </div>
+//-->

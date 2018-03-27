@@ -2,6 +2,7 @@
   "name": "imgrowth-web",
   "description": "Web interface for imgrowth system",
   "repositories": [
+    {"type": "vcs", "url": "https://github.com/ElBiniou/phi-core"},
     {"type": "vcs", "url": "https://github.com/ElBiniou/phi-routing"},
     {"type": "vcs", "url": "https://github.com/ElBiniou/phi-traits"},
     {"type": "vcs", "url": "https://github.com/ElBiniou/phi-http"},
@@ -19,6 +20,7 @@
     {"type": "vcs", "url": "https://github.com/ElBiniou/dashboard"}
   ],
   "require": {
+    "phi-core": "dev-master",
     "phi-traits": "dev-master",
     "phi-routing": "dev-master",
     "phi-http": "dev-master",
@@ -64,7 +66,10 @@
       "GuzzleHttp\\Promise\\": "static_vendor/guzzlehttp/promises/src/",
       "GuzzleHttp\\Psr7\\": "static_vendor/guzzlehttp/psr7/src/",
 
-      "Facebook\\": "static_vendor/php-graph-sdk-5.x/src/Facebook/"
+      "Facebook\\": "static_vendor/php-graph-sdk-5.x/src/Facebook/",
+
+
+      "Cocur\\Slugify\\": "static_vendor/slugify/src"
 
 
     }

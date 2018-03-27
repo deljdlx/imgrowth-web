@@ -4,6 +4,7 @@ namespace ImGrowth\Configuration\Router;
 
 
 
+use ImGrowth\Entity\Event;
 use ImGrowth\WordpressOAuth;
 use Phi\Application\Application;
 use Phi\Routing\Interfaces\Router;
@@ -172,6 +173,25 @@ class Main
 
         $router->get('index', '`.*`', function () use ($application) {
 
+            /*
+            $event = new Event(
+                $application->getContainer()->get('eventRepository')
+            );
+            $event->setValue('name', 'test');
+            $event->store();
+            die('EXIT '.__FILE__.'@'.__LINE__);
+            //*/
+
+            /*
+             *
+             *
+             */
+
+            /*
+            $repository = $application->getContainer()->get('eventRepository');
+            $repository->initialize();
+            die('EXIT '.__FILE__.'@'.__LINE__);
+            */
 
 
             /*

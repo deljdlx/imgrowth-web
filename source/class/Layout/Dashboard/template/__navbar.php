@@ -16,10 +16,15 @@
                     <input type="checkbox" name="lightSwitch" id="lightSwitch">
                 </label>
 
-                <label>
-                    <input id="myFileInput" type="file" accept="image/*;capture=camera" style="position: absolute; left:-1000px; top: -1000px">
-                    &nbsp;<i class="fas fa-camera" id="camTrigger" style="color:#FFF"></i>
-                </label>
+
+                <span class="fa-layers fa-fw" id="createProjectTrigger">
+                    <i class="fas fa-leaf"></i>
+                    <i class="fas fa-plus" style="color:#D00" data-fa-transform="shrink-5 down-5 right-6"></i>
+                </span>
+
+
+
+
             </div>
 
 

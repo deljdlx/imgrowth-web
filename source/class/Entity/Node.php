@@ -29,6 +29,13 @@ class Node extends Entity
     protected $account = null;
 
 
+    protected $urlRoot;
+    protected $lightOnURI = '/node/lightOn';
+    protected $lightOffURI = '/node/lightOff';
+    protected $dataURI = '/node/getData';
+
+
+
     public function getId() {
         return $this->getValue('id');
     }
@@ -51,7 +58,7 @@ class Node extends Entity
 
     public function getData()
     {
-        $dataURL='http://'.$this->getValue('ip').$this->getValue('data_uri');
+        $dataURL=$this->getURLRoot().$this->getValue('data_uri');
         $data = json_decode(file_get_contents($dataURL), true);
         return $data;
     }
@@ -72,6 +79,27 @@ class Node extends Entity
             $this->account = $repository->getAccountById($this->getValue('account_id'));
         }
         return $this->account;
+    }
+
+
+
+
+    public function getURLRoot()
+    {
+        return 'http://'.$this->getValue('ip');
+    }
+
+    public function lightOn()
+    {
+        $content = file_get_contents($this->getURLRoot().$this->lightOnURI);
+        return json_decode($content);
+    }
+
+
+    public function lightOff()
+    {
+        $content = file_get_contents($this->getURLRoot().$this->lightOffURI);
+        return json_decode($content);
     }
 
 

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cc0f66e51ff8d861f3c25e6939cf74ca",
-    "content-hash": "3b8a9892490cdef8b03131b5af0283bf",
+    "hash": "9d84c28f994cf2ec9d0961b2db4e2013",
+    "content-hash": "633b2117107432c090ef75a9c0b26c7a",
     "packages": [
         {
             "name": "elbiniou-dashboard",
@@ -42,198 +42,17 @@
             "time": "2017-06-23 07:53:14"
         },
         {
-            "name": "guzzlehttp/guzzle",
-            "version": "6.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "f4db5a78a5ea468d4831de7f0bf9d9415e348699"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/f4db5a78a5ea468d4831de7f0bf9d9415e348699",
-                "reference": "f4db5a78a5ea468d4831de7f0bf9d9415e348699",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/promises": "^1.0",
-                "guzzlehttp/psr7": "^1.4",
-                "php": ">=5.5"
-            },
-            "require-dev": {
-                "ext-curl": "*",
-                "phpunit/phpunit": "^4.0 || ^5.0",
-                "psr/log": "^1.0"
-            },
-            "suggest": {
-                "psr/log": "Required for using the Log middleware"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "6.2-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/functions_include.php"
-                ],
-                "psr-4": {
-                    "GuzzleHttp\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                }
-            ],
-            "description": "Guzzle is a PHP HTTP client library",
-            "homepage": "http://guzzlephp.org/",
-            "keywords": [
-                "client",
-                "curl",
-                "framework",
-                "http",
-                "http client",
-                "rest",
-                "web service"
-            ],
-            "time": "2017-06-22 18:50:49"
-        },
-        {
-            "name": "guzzlehttp/promises",
-            "version": "v1.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guzzle/promises.git",
-                "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/a59da6cf61d80060647ff4d3eb2c03a2bc694646",
-                "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.4-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\Promise\\": "src/"
-                },
-                "files": [
-                    "src/functions_include.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                }
-            ],
-            "description": "Guzzle promises library",
-            "keywords": [
-                "promise"
-            ],
-            "time": "2016-12-20 10:07:11"
-        },
-        {
-            "name": "guzzlehttp/psr7",
-            "version": "1.4.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guzzle/psr7.git",
-                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
-                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0",
-                "psr/http-message": "~1.0"
-            },
-            "provide": {
-                "psr/http-message-implementation": "1.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.4-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\Psr7\\": "src/"
-                },
-                "files": [
-                    "src/functions_include.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                },
-                {
-                    "name": "Tobias Schultze",
-                    "homepage": "https://github.com/Tobion"
-                }
-            ],
-            "description": "PSR-7 message implementation that also provides common utility methods",
-            "keywords": [
-                "http",
-                "message",
-                "request",
-                "response",
-                "stream",
-                "uri",
-                "url"
-            ],
-            "time": "2017-03-20 17:10:46"
-        },
-        {
             "name": "phi-application",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ElBiniou/phi-application.git",
-                "reference": "7e2a953aa058af9bad9ce8c9a28f81b099838c60"
+                "reference": "6c20a88c07aabd23680d8c4056b71d7d6a2c349d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ElBiniou/phi-application/zipball/7e2a953aa058af9bad9ce8c9a28f81b099838c60",
-                "reference": "7e2a953aa058af9bad9ce8c9a28f81b099838c60",
+                "url": "https://api.github.com/repos/ElBiniou/phi-application/zipball/6c20a88c07aabd23680d8c4056b71d7d6a2c349d",
+                "reference": "6c20a88c07aabd23680d8c4056b71d7d6a2c349d",
                 "shasum": ""
             },
             "require": {
@@ -254,7 +73,7 @@
                 "source": "https://github.com/ElBiniou/phi-application/tree/master",
                 "issues": "https://github.com/ElBiniou/phi-application/issues"
             },
-            "time": "2017-11-01 16:32:26"
+            "time": "2018-03-14 12:11:20"
         },
         {
             "name": "phi-cache",
@@ -375,17 +194,47 @@
             "time": "2018-02-09 10:00:46"
         },
         {
+            "name": "phi-core",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ElBiniou/phi-core.git",
+                "reference": "dde5db835dfb30eb8697d1bbc263483b5579774e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ElBiniou/phi-core/zipball/dde5db835dfb30eb8697d1bbc263483b5579774e",
+                "reference": "dde5db835dfb30eb8697d1bbc263483b5579774e",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "source/helper.php"
+                ],
+                "psr-4": {
+                    "Phi\\Core\\": "source/class"
+                }
+            },
+            "description": "A framework for people who don't like frameworks",
+            "support": {
+                "source": "https://github.com/ElBiniou/phi-core/tree/master",
+                "issues": "https://github.com/ElBiniou/phi-core/issues"
+            },
+            "time": "2017-08-19 16:55:22"
+        },
+        {
             "name": "phi-database",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ElBiniou/phi-database.git",
-                "reference": "02e286bca85595f05756cf9eb70ce01f424d2178"
+                "reference": "851ba3f5ff1ba35cc4b5a74dc1391653b58e70f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ElBiniou/phi-database/zipball/02e286bca85595f05756cf9eb70ce01f424d2178",
-                "reference": "02e286bca85595f05756cf9eb70ce01f424d2178",
+                "url": "https://api.github.com/repos/ElBiniou/phi-database/zipball/851ba3f5ff1ba35cc4b5a74dc1391653b58e70f6",
+                "reference": "851ba3f5ff1ba35cc4b5a74dc1391653b58e70f6",
                 "shasum": ""
             },
             "type": "library",
@@ -400,7 +249,7 @@
                 "source": "https://github.com/ElBiniou/phi-database/tree/master",
                 "issues": "https://github.com/ElBiniou/phi-database/issues"
             },
-            "time": "2018-02-07 17:02:16"
+            "time": "2018-02-21 10:47:19"
         },
         {
             "name": "phi-event",
@@ -492,12 +341,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ElBiniou/phi-routing.git",
-                "reference": "8142586065626fd28c7a624090b10389d423e9ba"
+                "reference": "50f32166debb0cdad2e94411e5d38b18eedd0dc9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ElBiniou/phi-routing/zipball/8142586065626fd28c7a624090b10389d423e9ba",
-                "reference": "8142586065626fd28c7a624090b10389d423e9ba",
+                "url": "https://api.github.com/repos/ElBiniou/phi-routing/zipball/50f32166debb0cdad2e94411e5d38b18eedd0dc9",
+                "reference": "50f32166debb0cdad2e94411e5d38b18eedd0dc9",
                 "shasum": ""
             },
             "require": {
@@ -516,7 +365,7 @@
                 "source": "https://github.com/ElBiniou/phi-routing/tree/master",
                 "issues": "https://github.com/ElBiniou/phi-routing/issues"
             },
-            "time": "2018-02-03 14:37:19"
+            "time": "2018-03-14 12:11:12"
         },
         {
             "name": "phi-session",
@@ -524,12 +373,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ElBiniou/phi-session.git",
-                "reference": "89bf2fec0878517de360cee2abeb943941d94290"
+                "reference": "42888c4ef0b269932659aeab3d31c9484b105a7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ElBiniou/phi-session/zipball/89bf2fec0878517de360cee2abeb943941d94290",
-                "reference": "89bf2fec0878517de360cee2abeb943941d94290",
+                "url": "https://api.github.com/repos/ElBiniou/phi-session/zipball/42888c4ef0b269932659aeab3d31c9484b105a7c",
+                "reference": "42888c4ef0b269932659aeab3d31c9484b105a7c",
                 "shasum": ""
             },
             "require": {
@@ -547,7 +396,7 @@
                 "source": "https://github.com/ElBiniou/phi-session/tree/master",
                 "issues": "https://github.com/ElBiniou/phi-session/issues"
             },
-            "time": "2017-06-01 11:08:33"
+            "time": "2018-02-09 11:17:51"
         },
         {
             "name": "phi-storage",
@@ -583,12 +432,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ElBiniou/phi-template.git",
-                "reference": "e50b4a837fff4b0146825f653b42e45c04396621"
+                "reference": "e7c9d62b614177e780b108b77bf4b5c218d4d047"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ElBiniou/phi-template/zipball/e50b4a837fff4b0146825f653b42e45c04396621",
-                "reference": "e50b4a837fff4b0146825f653b42e45c04396621",
+                "url": "https://api.github.com/repos/ElBiniou/phi-template/zipball/e7c9d62b614177e780b108b77bf4b5c218d4d047",
+                "reference": "e7c9d62b614177e780b108b77bf4b5c218d4d047",
                 "shasum": ""
             },
             "type": "library",
@@ -603,7 +452,7 @@
                 "source": "https://github.com/ElBiniou/phi-template/tree/master",
                 "issues": "https://github.com/ElBiniou/phi-template/issues"
             },
-            "time": "2017-08-08 09:49:56"
+            "time": "2018-03-14 10:14:04"
         },
         {
             "name": "phi-traits",
@@ -632,62 +481,13 @@
                 "issues": "https://github.com/ElBiniou/phi-traits/issues"
             },
             "time": "2017-06-30 12:28:03"
-        },
-        {
-            "name": "psr/http-message",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/http-message.git",
-                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
-                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\Http\\Message\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interface for HTTP messages",
-            "homepage": "https://github.com/php-fig/http-message",
-            "keywords": [
-                "http",
-                "http-message",
-                "psr",
-                "psr-7",
-                "request",
-                "response"
-            ],
-            "time": "2016-08-06 14:39:51"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "phi-core": 20,
         "phi-traits": 20,
         "phi-routing": 20,
         "phi-http": 20,

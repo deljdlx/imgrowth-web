@@ -4,6 +4,7 @@ namespace ImGrowth\Configuration\Router;
 
 
 
+use ImGrowth\Entity\Event;
 use ImGrowth\Entity\Node;
 use Phi\Application\Application;
 use Phi\Routing\Interfaces\Router;
@@ -56,6 +57,10 @@ class NodeAdministration
             $repository = $application->getContainer()->get('nodeRecordRepository');
             $repository->reset();
 
+            $repository = $application->getContainer()->get('eventRepository');
+            $repository->reset();
+
+
             $data = array(
                 'message' => 'System initialized'
             );
@@ -71,6 +76,22 @@ class NodeAdministration
 
         $router->post('node/register', '`/node/register`', function () use ($application) {
 
+
+            /**
+             * @var \ImGrowth\Repository\Node $nodeRepository
+             */
+            /*
+            $nodeRepository = $application->getContainer()->get('nodeRepository');
+            $node = $nodeRepository->getNodeById(4);
+
+            $event = new Event(
+                $application->getContainer()->get('eventRepository')
+            );
+
+            $event->setNode($node);
+            $event->store();
+            */
+
             $json= $this->request->post();
 
             $data=json_decode($json['data']);
@@ -85,7 +106,44 @@ class NodeAdministration
             $node->setValue('mac', $data->meta->mac);
             $node->setValue('firmware', $data->meta->firmware);
 
+            $nodeRepository = $application->getContainer()->get('nodeRepository');
+            $nodeRepository->store($node);
 
+
+            $event = new Event(
+                $application->getContainer()->get('eventRepository')
+            );
+
+            $event->setValue('name', 'start');
+
+            $event->setNode($node);
+            $event->store();
+
+            echo json_encode($node);
+
+
+
+
+
+        })->json();
+
+
+
+
+        $router->post('node/ping', '`/node/ping`', function () use ($application) {
+            $json= $this->request->post();
+
+            $data=json_decode($json['data']);
+
+            $rawData = json_encode($json, JSON_PRETTY_PRINT);
+
+
+            $node = new Node();
+            $node->setValue('data', $rawData);
+            $node->setValue('ip', $data->meta->ip);
+            $node->setValue('node_id', $data->meta->id);
+            $node->setValue('mac', $data->meta->mac);
+            $node->setValue('firmware', $data->meta->firmware);
 
             $nodeRepository = $application->getContainer()->get('nodeRepository');
             $nodeRepository->store($node);
@@ -94,11 +152,40 @@ class NodeAdministration
             echo json_encode($node);
 
 
+
         })->json();
 
 
 
 
+
+
+        $router->get('nodes/lightOff', '`/nodes/lightOff`', function () use ($application) {
+            /**
+             * @var \ImGrowth\Repository\Node $nodeRepository
+             */
+            $nodeRepository = $application->getContainer()->get('nodeRepository');
+            $nodes = $nodeRepository->getAll();
+
+            foreach ($nodes as $node) {
+                $node->lightOff();
+            }
+            echo json_encode($nodes);
+        })->json();
+
+
+        $router->get('nodes/lightOn', '`/nodes/lightOn`', function () use ($application) {
+            /**
+             * @var \ImGrowth\Repository\Node $nodeRepository
+             */
+            $nodeRepository = $application->getContainer()->get('nodeRepository');
+            $nodes = $nodeRepository->getAll();
+
+            foreach ($nodes as $node) {
+                $node->lightOn();
+            }
+            echo json_encode($nodes);
+        })->json();
 
 
 

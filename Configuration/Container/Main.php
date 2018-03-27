@@ -4,24 +4,17 @@ namespace ImGrowth\Configuration\Container;
 
 
 use Phi\Application\Application;
+use Phi\Container\Container;
 
-class Main
+class Main extends Container
 {
 
-    private $application;
 
-    public function __construct(Application $application)
-    {
-        $this->application = $application;
-    }
-
-
-    public function inject()
+    public function __construct()
     {
 
-        $application = $this->application;
 
-        $this->application->getContainer()->set('database', function () {
+        $this->set('database', function () {
             $fileName = 'sqlite:' . APPLICATION_ROOT . '/data/imgrowth.sqlite';
             $driver = new \Phi\Database\Driver\PDO\Source($fileName);
 
@@ -31,22 +24,28 @@ class Main
         });
 
 
-        $this->application->getContainer()->set('nodeRepository', function () use ($application) {
+        $this->set('nodeRepository', function () {
 
             return new \ImGrowth\Repository\Node(
-                $application->getContainer()->get('database')
+                $this->get('database')
             );
         });
 
-        $this->application->getContainer()->set('nodeRecordRepository', function () use ($application) {
+        $this->set('nodeRecordRepository', function () {
             return new \ImGrowth\Repository\NodeRecord(
-                $application->getContainer()->get('database')
+                $this->get('database')
             );
         });
 
-        $this->application->getContainer()->set('accountRepository', function () use ($application) {
+        $this->set('accountRepository', function () {
             return new \ImGrowth\Repository\Account(
-                $application->getContainer()->get('database')
+                $this->get('database')
+            );
+        });
+
+        $this->set('eventRepository', function () {
+            return new \ImGrowth\Repository\Event(
+                $this->get('database')
             );
         });
 
@@ -56,53 +55,51 @@ class Main
 
 
 
-
-
-        $this->application->getContainer()->set('nodeService', function () use ($application) {
+        $this->set('nodeService', function () {
             return new \ImGrowth\Node('http://192.168.0.15');
         });
 
 
 
+        //=======================================================
+        //=======================================================
 
-        $this->application->getContainer()->set('wordpressOAuth', function () {
-            $server = new \ImGrowth\WordpressOAuth(array(
-                'identifier' => 'W9MgWiN4LB5A',
-                'secret' => 'NoZryXkABLP3yutEmTsf5yMzh9aUfrMD8j0xFJYR35rZryVD',
-                'callback_uri' => "http://192.168.0.10/project/imgrowth-web/www/index.php/oauth/wordpress/callback",
-            ));
-
-            $server->setURLRoot('http://imgrowth.jlb.ninja/wp-json/wp/v2');
-
-            return $server;
+        $this->set('wordpress', function () {
+            return new Wordpress();
         });
 
 
-        $this->application->getContainer()->set('session', function () {
+
+        //=======================================================
+        //=======================================================
+
+
+        $this->set('session', function () {
             $session = new \Phi\Session\Session();
             return $session;
         });
 
 
 
-        $this->application->getContainer()->set('node', function () use ($application) {
+        $this->set('node', function () {
             $node = new \ImGrowth\Entity\Node();
             $node->setStorage(
-                $application->getContainer()->get('nodeRepository')
+                $this->get('nodeRepository')
             );
             return $node;
         }, false);
 
 
-        $this->application->getContainer()->set('nodeRecord', function () use ($application) {
+        $this->set('nodeRecord', function () {
             $nodeRecord = new \ImGrowth\Entity\NodeRecord();
             $nodeRecord->setStorage(
-                $application->getContainer()->get('nodeRepository')
+                $this->get('nodeRepository')
             );
             return $nodeRecord;
         }, false);
-
     }
+
+
 
 
 }

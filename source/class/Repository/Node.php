@@ -91,6 +91,9 @@ class Node extends Repository
     }
 
 
+    /**
+     * @return NodeEntity[]
+     */
     public function getAll()
     {
 
@@ -146,7 +149,7 @@ class Node extends Repository
     public function store(Entity $node)
     {
 
-        if (!$this->exists($node) || 1) {
+        if (!$this->exists($node)) {
             $ip = $node->getValue('ip');
 
 
@@ -200,6 +203,7 @@ class Node extends Repository
             $query = "
                 UPDATE ".$this->getTableName()." SET 
                   ping_time =" . $this->database->escape(date('Y-m-d H:i:s')) . "
+                WHERE ip=" . $this->database->escape($node->getValue('ip')) . "
             ";
             $this->database->query($query);
         }

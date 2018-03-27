@@ -45,7 +45,9 @@
 
 <script src="javascript/class/Application.js" type="text/javascript"></script>
 
+
 <script src="Component/Project/public/Project.js" type="text/javascript"></script>
+<link rel="stylesheet" href="Component/Project/public/style.css" />
 
 
 <script src="javascript/class/Seed.js" type="text/javascript"></script>

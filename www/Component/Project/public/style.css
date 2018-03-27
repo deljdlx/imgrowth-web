@@ -1,0 +1,59 @@
+#createProjectContainer {
+    display: none;
+}
+
+#photoProjectPreview
+{
+    position: relative;
+
+}
+
+#photoProjectPreview img
+{
+    max-height: 300px;
+    max-weidth: 100%;
+}
+
+
+
+.projectThumbnail {
+    position: relative;
+}
+
+.projectThumbnail img {
+    border: 5px solid;
+    border-radius: 100%;
+    height: 150px;
+    width:150px;
+}
+
+.projectThumbnail .projectPhotoTrigger {
+    position: absolute;
+
+    left: 110px;
+    top: -150px;
+
+    border: solid 2px #000;
+
+    width: 4em;
+    height:4em;
+
+    text-align: center;
+
+    line-height: 3.7em;
+    font-size: 1.1em;
+    border-radius: 100%;
+    background-color: #DFD;
+    color: #000;
+    box-shadow: #000 3px 3px 3px;
+}
+
+.modal-body img {
+
+    max-height: 350px;
+    max-width: 80%;
+}
+
+.modal-body .imageContainer {
+    text-align: center;
+}

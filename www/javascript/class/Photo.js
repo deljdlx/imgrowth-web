@@ -133,7 +133,8 @@ ImGrowth.Photo.prototype.EXIFRotation = function(image, callback) {
 
     EXIF.getData(image, function() {
 
-        console.debug(EXIF.pretty(this));
+        //console.debug(EXIF.pretty(this));
+
         orientation = EXIF.getTag(this, "Orientation");
 
         var canvas = document.createElement('canvas');

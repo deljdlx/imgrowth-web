@@ -59,6 +59,10 @@ ImGrowth.Application.prototype.initializeProjectPanel = function(index) {
 
     var project = new ImGrowth.Project();
     project.initializeCreationPanel();
+
+
+    project.initializeListPanel();
+
 }
 
 
@@ -382,11 +386,7 @@ ImGrowth.Application.prototype.start = function() {
     var manager = this;
 
 
-
-
-    if(document.getElementById('projectPhotoTrigger')) {
-        this.initializeProjectPanel();
-    }
+    this.initializeProjectPanel();
 
 
     if(document.getElementById('myFileInput')) {

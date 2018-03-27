@@ -31,13 +31,18 @@ class  News
 
         $router->get('oauth/wordpress', '`/oauth/wordpress$`', function () use ($application) {
 
-            $server = $application->getContainer()->get('wordpressOAuth');
-            $session = $application->getContainer()->get('session');
+            $server = $application->get('wordpressOAuth');
+            $session = $application->get('session');
+
+
 
             $temporaryCredentials = $server->getTemporaryCredentials();
 
+
             // Store the credentials in the session.
             $session->set('temporary_credentials', serialize($temporaryCredentials));
+
+
 
             $server->authorize($temporaryCredentials);
 
@@ -55,10 +60,19 @@ class  News
             $session->delete('temporary_credentials');
             $session->set('wordpress_token', serialize($tokenCredentials));
 
-            file_put_contents(APPLICATION_ROOT.'/data/wordpress-token.txt', serialize($tokenCredentials));
+
+            $tokenName = $application->get('wordpressOAuthTokenName');
+
+            file_put_contents(APPLICATION_ROOT.'/data/'.$tokenName, serialize($tokenCredentials));
 
             $session->close();
+            die('EXIT '.__FILE__.'@'.__LINE__);
         });
+
+
+
+
+
 
 
 
