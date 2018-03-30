@@ -8,6 +8,16 @@ $application = new \Phi\Application\Application(__DIR__);
 
 $container = new \ImGrowth\Configuration\Container\Main();
 
+
+
+//=======================================================
+//=======================================================
+
+$container->set('wordpress', function () {
+    return new \ImGrowth\Configuration\Container\WordpressProduction();
+});
+
+
 $application->setContainer($container);
 
 

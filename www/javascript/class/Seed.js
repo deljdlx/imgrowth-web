@@ -6,8 +6,8 @@ ImGrowth.Seed = function()
     this.saveHumidityConfigurationURL = 'index.php/node/saveHumidityConfiguration';
 
 
-    this.lightOffURL = 'index.php/node/lightOff';
-    this.lightOnURL = 'index.php/node/lightOn';
+    this.lightOffURL = 'index.php?/nodes/lightOff';
+    this.lightOnURL = 'index.php?/nodes/lightOn';
 
     this.getHistoryDataURL='index.php/node/1/getRecords';
 
@@ -78,7 +78,7 @@ ImGrowth.Seed.prototype.water=function(index) {
 
 ImGrowth.Seed.prototype.lightOn=function(index) {
     $.ajax({
-        url: this.lightOnURL+index,
+        url: this.lightOnURL,
         success: function(data) {
             console.debug(data);
         }
@@ -88,7 +88,7 @@ ImGrowth.Seed.prototype.lightOn=function(index) {
 
 ImGrowth.Seed.prototype.lightOff=function(index) {
     $.ajax({
-        url: this.lightOffURL+index,
+        url: this.lightOffURL,
         success: function(data) {
             console.debug(data);
         }
