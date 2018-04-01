@@ -23,6 +23,51 @@ class Controller extends \Phi\Application\Controller
     public function getList()
     {
 
+        $application = $this->application;
+
+        $apiURL = $application->get('wordpress')->get('APIURL');
+
+        $projectCategory = $application->get('wordpress')->get('projectCategory');
+
+        $projectCategoryId = $projectCategory->id;
+
+        $urlGetProjects = $apiURL.'/categories?parent='.$projectCategoryId.'&per_page=20';
+        $categories=json_decode(file_get_contents($urlGetProjects));
+
+
+        $idList = [];
+        $projects = [];
+        foreach ($categories as $project) {
+            $idList[] = $project->id;
+            $projects[$project->id] = $project;
+        }
+
+
+        $articlePerRubrique = [];
+        foreach ($idList as $projectId) {
+            $getArticleURL = $apiURL.'/posts?categories='.$projectId.'&per_page=1';
+
+            $data = json_decode(
+                file_get_contents($getArticleURL)
+            );
+
+            foreach ($data as $article) {
+                $articleProjectIdList = array_intersect($idList, $article->categories);
+                $articleProjectId = current($articleProjectIdList);
+
+                if(!isset($articlePerRubrique[$articleProjectId])) {
+                    $articlePerRubrique['project-'.$articleProjectId] = array(
+                        'category' => $projects[$articleProjectId],
+                        'article' => $article
+                    );
+                }
+                else {
+                    break;
+                }
+            }
+        }
+
+        return $articlePerRubrique;
     }
 
 

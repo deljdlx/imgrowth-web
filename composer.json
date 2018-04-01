@@ -13,10 +13,16 @@
     {"type": "vcs", "url": "https://github.com/ElBiniou/phi-storage"},
     {"type": "vcs", "url": "https://github.com/ElBiniou/phi-event"},
     {"type": "vcs", "url": "https://github.com/ElBiniou/phi-application"},
+
+    {"type": "vcs", "url": "https://github.com/ElBiniou/phi-dom"},
     {"type": "vcs", "url": "https://github.com/ElBiniou/phi-component"},
+    {"type": "vcs", "url": "https://github.com/ElBiniou/phi-domtemplate"},
+
+
     {"type": "vcs", "url": "https://github.com/ElBiniou/phi-template"},
     {"type": "vcs", "url": "https://github.com/ElBiniou/phi-container"},
     {"type": "vcs", "url": "https://github.com/ElBiniou/phi-configuration"},
+
     {"type": "vcs", "url": "https://github.com/ElBiniou/dashboard"}
   ],
   "require": {
@@ -31,10 +37,16 @@
     "phi-storage": "dev-master",
     "phi-event": "dev-master",
     "phi-application": "dev-master",
+
+    "phi-dom": "dev-master",
     "phi-component": "dev-master",
+    "phi-domtemplate": "dev-master",
+
     "phi-template": "dev-master",
     "phi-container": "dev-master",
     "phi-configuration": "dev-master",
+
+
 
     "elbiniou-dashboard": "dev-master"
   },

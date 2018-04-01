@@ -33,10 +33,24 @@
 <script src="javascript/class/CircleGauge.js" type="text/javascript"></script>
 
 
-<script>
 
+
+<link rel="stylesheet" type="text/css" href="vendor/slick-1.8.0/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="vendor/slick-1.8.0/slick/slick-theme.css"/>
+<script type="text/javascript" src="vendor/slick-1.8.0/slick/slick.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('.project-timeline-container').slick({
+
+    });
+    });
 
 </script>
+
+
+
+
 
 
 <script src="vendor/echarts.min.js"></script>

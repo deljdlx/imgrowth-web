@@ -168,7 +168,12 @@ class NodeAdministration
             $nodes = $nodeRepository->getAll();
 
             foreach ($nodes as $node) {
-                $node->lightOff();
+                if(
+                    (time() - strtotime(-$node->getValue('ping_time'))) < 600
+                ) {
+                    $node->lightOff();
+                }
+
             }
             echo json_encode($nodes);
         })->json();
@@ -181,10 +186,17 @@ class NodeAdministration
             $nodeRepository = $application->getContainer()->get('nodeRepository');
             $nodes = $nodeRepository->getAll();
 
+            $nodesOn = [];
+
             foreach ($nodes as $node) {
-                $node->lightOn();
+                if(
+                    (time() - strtotime($node->getValue('ping_time'))) < 600
+                ) {
+                    $node->lightOn();
+                    $nodesOn[] = $node;
+                }
             }
-            echo json_encode($nodes);
+            echo json_encode($nodesOn);
         })->json();
 
 

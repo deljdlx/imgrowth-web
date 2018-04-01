@@ -73,17 +73,13 @@ class Router extends PhiRouter
             );
 
             echo json_encode($data);
-
-
-
-
-
         })->json();
 
 
-        $this->get('timeline', '`/timeline/(\d+)`', function($projectId) use ($application) {
+
+        $this->get('timeline', '`/(\d+)/timelinee`', function($projectId) use ($application) {
             $apiURL = $application->get('wordpress')->get('APIURL');
-            $sourceURL = $apiURL.'/posts?categories=25';
+            $sourceURL = $apiURL.'/posts?categories='.$projectId.'&per_page=20';
             $json = file_get_contents($sourceURL);
             echo $json;
         })->json();
@@ -91,7 +87,7 @@ class Router extends PhiRouter
 
         $this->get('api/timeline', '`/api/timeline/(\d+)`', function($projectId) use ($application) {
             $apiURL = $application->get('wordpress')->get('APIURL');
-            $sourceURL = $apiURL.'/posts?categories=25';
+            $sourceURL = $apiURL.'/posts?categories='.$projectId;
             $json = file_get_contents($sourceURL);
             echo $json;
         })->json();
@@ -102,44 +98,12 @@ class Router extends PhiRouter
 
         $this->get('list', '`/api/list`', function() use ($application) {
 
-            $apiURL = $application->get('wordpress')->get('APIURL');
+            $controller = new Controller($application);
 
-            $projectCategory = $application->get('wordpress')->get('projectCategory');
-
-            $projectCategoryId = $projectCategory->id;
-
-            $urlGetProjects = $apiURL.'/categories?parent='.$projectCategoryId;
-            $categories=json_decode(file_get_contents($urlGetProjects));
-
-            $idList = [];
-            $projects = [];
-            foreach ($categories as $project) {
-                $idList[] = $project->id;
-                $projects[$project->id] = $project;
-            }
-
-            $getArticleURL = $apiURL.'/posts?categories='.implode(',', $idList);
-
-            $data = json_decode(
-                file_get_contents($getArticleURL)
+            echo json_encode(
+               $controller->getList()
             );
-
-
-            $articlePerRubrique = [];
-            foreach ($data as $article) {
-                $articleProjectIdList = array_intersect($idList, $article->categories);
-                $articleProjectId = current($articleProjectIdList);
-
-                if(!isset($articlePerRubrique[$articleProjectId])) {
-                    $articlePerRubrique['project-'.$articleProjectId] = array(
-                        'category' => $projects[$articleProjectId],
-                        'article' => $article
-                    );
-                }
-            }
-
-            echo json_encode($articlePerRubrique);
-
+            return;
         })->json();
 
     }

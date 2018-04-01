@@ -7,6 +7,7 @@ namespace ImGrowth\Configuration\Router;
 use ImGrowth\Entity\Event;
 use ImGrowth\WordpressOAuth;
 use Phi\Application\Application;
+use Phi\DOMTemplate\Template;
 use Phi\Routing\Interfaces\Router;
 use Phi\Session\Session;
 
@@ -28,6 +29,15 @@ class Main
         $application = $this->application;
 
 
+
+
+        $router->get('initializeLayout', '`.*`', function () use ($application) {
+
+            $layout =  new \ImGrowth\Layout\Dashboard\Main();
+            $application->set('layout', $layout);
+            return true;
+
+        });
 
 
 
@@ -173,6 +183,56 @@ class Main
 
         $router->get('index', '`.*`', function () use ($application) {
 
+
+            /*
+            $html = '<div>hello world</div>';
+            $test = new Template($html);
+            echo $test->render();
+            die('EXIT '.__FILE__.'@'.__LINE__);
+            $template='
+    <div style="border: solid 3px #002a80; padding: 10px;">
+        <div>-> {{{content}}}</div>
+
+        Composant container
+
+       <div>
+            <phi-component data-instanceof="TestComponent">
+
+            </phi-component>
+       </div>
+    </div>
+';
+
+            $test=new \Phi\Component\Template($template);
+            $test->registerCustomTag('phi-component', function() {
+                return '<button>Custom tag phi-component</button>';
+            });
+            $test->setVariable('content', 'Contenu injecté');
+            echo $test->render();
+            echo '<hr/>';
+
+            return;
+*/
+
+            /*
+            $domBuffer=$application->get('layout');
+
+            $document=new \Phi\DOMTemplate\Element($domBuffer);
+            $document->find('#test .content span:first-child')->each(function($index, $node) {
+                $node->style->backgroundColor='#0F0';
+                echo $node->render();
+                echo '<br />';
+            });
+            die('EXIT '.__FILE__.'@'.__LINE__);
+            */
+
+            echo $application->get('layout');
+
+            /*
+            $layout =  new \ImGrowth\Layout\Dashboard\Main();
+            echo $layout->render();
+            */
+
             /*
             $event = new Event(
                 $application->getContainer()->get('eventRepository')
@@ -218,10 +278,6 @@ class Main
 
             //die('EXIT '.__FILE__.'@'.__LINE__);
 
-
-
-            $layout =  new \ImGrowth\Layout\Dashboard\Main();
-            echo $layout->render();
         });
 
 

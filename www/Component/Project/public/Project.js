@@ -157,7 +157,7 @@ ImGrowth.Project.prototype.renderProject = function(project)
     element.setAttribute('class', 'projectThumbnail col-lg-2 col-md-3  col-sm-6 col-xs-6');
     element.innerHTML =
         '<h3>'+project['category'].name+'</h3>' +
-        '<a href="index.php/project/'+project['category'].id+'/timeline">'+
+        '<a href="index.php?/project/'+project['category'].id+'/timeline">'+
             '<img src="'+project['article'].better_featured_image.media_details.sizes.thumbnail.source_url+'"/>'+
         '</a>'+
         '<div style="position: relative">'+

@@ -1,6 +1,15 @@
 
 
 
+<div class="fieldset">
+    <?php
+    $template = new \ImGrowth\Component\Project\View\Timeline();
+    echo $template->render();
+    ?>
+</div>
+
+
+
 
 <div class="fieldset">
     <?php
